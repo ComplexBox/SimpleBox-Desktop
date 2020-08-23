@@ -3,16 +3,19 @@
                     xmlns:local="clr-namespace:SimpleBox.Controls">
 
     <Style TargetType="local:FluentIcon" >
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:FluentIcon">
                     <Path x:Name="IconDisplay"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              Fill="{TemplateBinding Fill}"
-                              Stroke="{TemplateBinding Stroke}"
-                              Width="{TemplateBinding Width}"
-                              Height="{TemplateBinding Height}"
+                              Fill="{DynamicResource SystemBaseHighColorBrush}"
+                              Stroke="{x:Null}"
+                              Width="24"
+                              Height="24"
                               MaxWidth="{TemplateBinding MaxWidth}"
                               MaxHeight="{TemplateBinding MaxHeight}"
                               MinWidth="{TemplateBinding MinWidth}"
