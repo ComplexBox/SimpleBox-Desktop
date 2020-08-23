@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SimpleBox</id>
+    <version>0.0.0.0</version>
+    <title>SimpleBox</title>
+    <authors>Il Harper</authors>
+    <owners>Il Harper</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/ComplexBox/SimpleBox-Desktop/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://simplebox.vbox.moe/</projectUrl>
+    <iconUrl>https://vbox.moe/Icons/Icons/SimpleBox/SimpleBox.Colored.Transparent.ico</iconUrl>
+    <description>Desktop App for SimpleBox.</description>
+    <summary>Desktop App for SimpleBox.</summary>
+    <copyright>2020 Il Harper</copyright>
+    <language>zh-CN</language>
+    <tags>SimpleBox</tags>
+  </metadata>
+  <files>
+    <file src="..\SimpleBox\bin\x64\Release\**" target="lib\net48\" exclude="**\*.pdb" />
+  </files>
+</package>
