@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SimpleBox.Helpers;
+using SimpleBox.Models;
 
 namespace SimpleBox.Windows
 {
@@ -22,6 +24,11 @@ namespace SimpleBox.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            Closing += (sender, args) =>
+            {
+                ConfigHelper.SaveConfig(Config.Current);
+            };
 
             Closed += (sender, args) => Application.Current.Shutdown(0);
         }
