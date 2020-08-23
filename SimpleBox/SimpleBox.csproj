@@ -65,6 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\FluentIcon.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
@@ -112,6 +113,10 @@
     <SplashScreen Include="Assets\SimpleBox.Splash.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\FluentSymbolIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
