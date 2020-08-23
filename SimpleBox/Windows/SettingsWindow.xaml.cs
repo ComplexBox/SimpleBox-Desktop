@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using SimpleBox.Helpers;
 
 namespace SimpleBox.Windows
 {
@@ -19,9 +22,34 @@ namespace SimpleBox.Windows
     /// </summary>
     public partial class SettingsWindow
     {
+        #region Current
+
+        public static SettingsWindow Current { get; set; } = new SettingsWindow();
+
+        public static void ShowSettings()
+        {
+            Current ??= new SettingsWindow();
+            Current.ShowDialog();
+        }
+
+        #endregion
+
+        #region Constructors
+
         public SettingsWindow()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region Event Processors
+
+        private void UpdateButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateHelper.Current.TriggerProcess();
+        }
+
+        #endregion
     }
 }
