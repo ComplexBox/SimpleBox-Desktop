@@ -5,21 +5,23 @@
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   xmlns:local="clr-namespace:SimpleBox.Windows"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+                  xmlns:controls="clr-namespace:SimpleBox.Controls"
                   mc:Ignorable="d"
                   Title="SimpleBox"
                   Height="600" Width="1056"
                   MinHeight="600" MinWidth="1056"
+                  AcrylicWindowStyle="NoIcon"
+                  ExtendViewIntoTitleBar="True"
+                  TextOptions.TextFormattingMode="Display"
                   Icon="/SimpleBox;component/Assets/SimpleBox.Colored.Transparent.ico"
                   FontFamily="Segoe UI"
                   Foreground="White"
                   UseLayoutRounding="True"
-                  TextOptions.TextFormattingMode="Display"
+                  NoiseOpacity="0"
                   SnapsToDevicePixels="True"
-                  AcrylicWindowStyle="NoIcon"
-                  ExtendViewIntoTitleBar="True"
                   fw:PointerTracker.Enabled="True"
                   Name="RootElement">
     <Grid>
-        
+
     </Grid>
 </fw:AcrylicWindow>
