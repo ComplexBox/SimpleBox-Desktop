@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using SimpleBox.Windows;
+using SourceChord.FluentWPF;
 
 namespace SimpleBox
 {
@@ -41,6 +42,10 @@ namespace SimpleBox
             };
 
             SimpleBox.Properties.Resources.Culture = CultureInfo.CurrentUICulture;
+
+            // Force Dark Theme
+
+            ResourceDictionaryEx.GlobalTheme = ElementTheme.Dark;
 
             // Create MainWindow
 
