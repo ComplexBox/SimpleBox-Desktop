@@ -108,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SimpleBox.Colored.Transparent.ico" />
+    <Resource Include="Assets\SimpleBox.Colored.Transparent.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
     <Message Text="Starting AfterBuild..." />
