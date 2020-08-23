@@ -34,7 +34,7 @@ namespace SimpleBox.Controls
         }
 
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register(
-            "Size", typeof(double), typeof(FluentIcon), new PropertyMetadata(1.5, OnSizeChanged));
+            "Size", typeof(double), typeof(FluentIcon), new PropertyMetadata(1d, OnSizeChanged));
 
         private static void OnSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
