@@ -104,7 +104,9 @@
       <Version>1.9.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SplashScreen Include="Assets\SimpleBox.Splash.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
