@@ -6,7 +6,8 @@
                   xmlns:local="clr-namespace:SimpleBox.Windows"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                   mc:Ignorable="d"
-                  Title="MainWindow" Height="450" Width="800">
+                  Title="SimpleBox" Height="450" Width="800"
+                  Icon="/SimpleBox;component/Assets/SimpleBox.Colored.Transparent.ico">
     <Grid>
         
     </Grid>
