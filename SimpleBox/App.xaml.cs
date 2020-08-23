@@ -6,8 +6,10 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using SimpleBox.Models;
 using SimpleBox.Windows;
 using SourceChord.FluentWPF;
+using Squirrel;
 
 namespace SimpleBox
 {
@@ -40,6 +42,28 @@ namespace SimpleBox
                     MessageBoxImage.Error,
                     MessageBoxResult.OK);
             };
+
+            // SquirrelAware
+
+            using (UpdateManager mgr = new UpdateManager(Config.Current.UpdateServer))
+            {
+                SquirrelAwareApp.HandleEvents(
+                    onInitialInstall: v =>
+                    {
+                        mgr.CreateShortcutForThisExe();
+                        Current.Shutdown(0);
+                    },
+                    onAppUpdate: v =>
+                    {
+                        mgr.CreateShortcutForThisExe();
+                        Current.Shutdown(0);
+                    },
+                    onAppUninstall: v =>
+                    {
+                        mgr.RemoveShortcutForThisExe();
+                        Current.Shutdown(0);
+                    });
+            }
 
             SimpleBox.Properties.Resources.Culture = CultureInfo.CurrentUICulture;
 
