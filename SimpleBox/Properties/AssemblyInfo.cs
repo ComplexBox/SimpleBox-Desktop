@@ -8,7 +8,7 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("SimpleBox")]
-[assembly: AssemblyDescription("简单的提问箱。")]
+[assembly: AssemblyDescription("Desktop App for SimpleBox.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Il Harper")]
 [assembly: AssemblyProduct("SimpleBox")]
