@@ -39,14 +39,14 @@ namespace SimpleBox.Models
         #region User Data
 
         [JsonProperty]
-        private string domain = "";
+        private string username = "";
 
-        public string Domain
+        public string Username
         {
-            get => domain;
+            get => username;
             set
             {
-                domain = value;
+                username = value;
                 OnPropertyChanged();
             }
         }
