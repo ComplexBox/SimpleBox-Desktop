@@ -18,10 +18,52 @@
                   Foreground="White"
                   UseLayoutRounding="True"
                   NoiseOpacity="0"
+                  TintOpacity="0"
                   SnapsToDevicePixels="True"
                   fw:PointerTracker.Enabled="True"
                   Name="RootElement">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#40000000">
+            <Grid Margin="0,32,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                            HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Person"/>
+                            <TextBlock Grid.Column="1" Text="未登录"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                            Click="OpenSettingsButtonBase_OnClick">
+                        <controls:FluentIcon Symbol="Settings"/>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Background="#A0000000">
+            <Grid Margin="0,32,0,0"/>
+        </Grid>
+        <Grid Grid.Column="2" Background="#C0000000">
+            <Grid Margin="0,32,0,0"/>
+        </Grid>
     </Grid>
 </fw:AcrylicWindow>

@@ -21,6 +21,8 @@ namespace SimpleBox.Windows
     /// </summary>
     public partial class MainWindow
     {
+        #region Constructors
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,5 +35,13 @@ namespace SimpleBox.Windows
 
             Closed += (sender, args) => Application.Current.Shutdown(0);
         }
+
+        #endregion
+
+        #region Event Triggers
+
+        private void OpenSettingsButtonBase_OnClick(object sender, RoutedEventArgs e) => SettingsWindow.ShowSettings();
+
+        #endregion
     }
 }
