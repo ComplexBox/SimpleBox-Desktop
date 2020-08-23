@@ -28,6 +28,7 @@ namespace SimpleBox.Windows
             Closing += (sender, args) =>
             {
                 ConfigHelper.SaveConfig(Config.Current);
+                UpdateHelper.Current.Dispose();
             };
 
             Closed += (sender, args) => Application.Current.Shutdown(0);
