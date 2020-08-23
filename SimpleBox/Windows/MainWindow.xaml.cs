@@ -22,6 +22,8 @@ namespace SimpleBox.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            Closed += (sender, args) => Application.Current.Shutdown(0);
         }
     }
 }
