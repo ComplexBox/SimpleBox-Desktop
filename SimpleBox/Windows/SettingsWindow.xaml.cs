@@ -29,7 +29,15 @@ namespace SimpleBox.Windows
         public static void ShowSettings()
         {
             Current ??= new SettingsWindow();
-            Current.ShowDialog();
+            try
+            {
+                Current.ShowDialog();
+            }
+            catch (InvalidOperationException)
+            {
+                Current = new SettingsWindow();
+                Current.ShowDialog();
+            }
         }
 
         #endregion
