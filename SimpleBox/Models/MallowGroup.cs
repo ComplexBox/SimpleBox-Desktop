@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SimpleBox.Helpers;
 using SimpleBox.Utils;
 
 namespace SimpleBox.Models
@@ -17,7 +18,7 @@ namespace SimpleBox.Models
     {
         #region Current
 
-        public static ObservableCollection<MallowGroup> Current { get; set; }
+        public static ObservableCollection<MallowGroup> Current { get; set; } = StorageHelper.LoadData();
 
         #endregion
 
