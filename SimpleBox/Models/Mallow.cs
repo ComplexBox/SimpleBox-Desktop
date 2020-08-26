@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SimpleBox.Utils;
 
 namespace SimpleBox.Models
 {
@@ -76,9 +77,10 @@ namespace SimpleBox.Models
         }
 
         [JsonProperty]
-        private long createTime;
+        [JsonConverter(typeof(MallowDateTimeConverter))]
+        private DateTime? createTime;
 
-        public long OriginalCreateTime
+        public DateTime? OriginalCreateTime
         {
             get => createTime;
             set
@@ -89,9 +91,10 @@ namespace SimpleBox.Models
         }
 
         [JsonProperty]
-        private long responseTime;
+        [JsonConverter(typeof(MallowDateTimeConverter))]
+        private DateTime? responseTime;
 
-        public long OriginalResponseTime
+        public DateTime? OriginalResponseTime
         {
             get => responseTime;
             set
@@ -159,9 +162,10 @@ namespace SimpleBox.Models
         }
 
         [JsonProperty]
-        private long localCreateTime;
+        [JsonConverter(typeof(MallowDateTimeConverter))]
+        private DateTime? localCreateTime;
 
-        public long LocalCreateTime
+        public DateTime? LocalCreateTime
         {
             get => localCreateTime;
             set
@@ -172,9 +176,10 @@ namespace SimpleBox.Models
         }
 
         [JsonProperty]
-        private long localResponseTime;
+        [JsonConverter(typeof(MallowDateTimeConverter))]
+        private DateTime? localResponseTime;
 
-        public long LocalResponseTime
+        public DateTime? LocalResponseTime
         {
             get => localResponseTime;
             set
@@ -196,10 +201,8 @@ namespace SimpleBox.Models
                 LocalMessage = OriginalMessage;
             if (string.IsNullOrEmpty(localResponse))
                 LocalResponse = OriginalResponse;
-            if (LocalCreateTime == 0)
-                LocalCreateTime = OriginalCreateTime;
-            if (LocalResponseTime == 0)
-                LocalResponseTime = OriginalResponseTime;
+            LocalCreateTime ??= OriginalCreateTime;
+            LocalResponseTime ??= OriginalResponseTime;
         }
 
         #endregion
