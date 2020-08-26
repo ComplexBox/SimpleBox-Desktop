@@ -14,13 +14,13 @@ namespace SimpleBox.Helpers
     {
         private static string GetConfigFileName() => Path.Combine(ConfigHelper.GetConfigFolder(), "data.json");
 
-        public static ObservableCollection<MallowGroup> LoadData() =>
+        public static MallowSource LoadData() =>
             !File.Exists(GetConfigFileName())
-                ? new ObservableCollection<MallowGroup>()
-                : JsonConvert.DeserializeObject<ObservableCollection<MallowGroup>>(
+                ? new MallowSource()
+                : JsonConvert.DeserializeObject<MallowSource>(
                     File.ReadAllText(GetConfigFileName()));
 
-        public static void SaveData(ObservableCollection<MallowGroup> data) =>
+        public static void SaveData(MallowSource data) =>
             File.WriteAllText(
                 GetConfigFileName(), JsonConvert.SerializeObject(data));
     }

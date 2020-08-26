@@ -14,14 +14,50 @@ using SimpleBox.Utils;
 namespace SimpleBox.Models
 {
     [JsonObject]
-    public class MallowGroup : INotifyPropertyChanged
+    public class MallowSource : INotifyPropertyChanged
     {
         #region Current
 
-        public static ObservableCollection<MallowGroup> Current { get; set; } = StorageHelper.LoadData();
+        public static MallowSource CurrentSource { get; set; } = StorageHelper.LoadData();
 
         #endregion
 
+        #region Data
+
+        [JsonProperty]
+        private ObservableCollection<MallowGroup> data = new ObservableCollection<MallowGroup>();
+
+        public ObservableCollection<MallowGroup> Data => data;
+
+        private MallowGroup _current;
+
+        public MallowGroup Current
+        {
+            get => _current;
+            set
+            {
+                _current = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Property Changed
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
+
+    [JsonObject]
+    public class MallowGroup : INotifyPropertyChanged
+    {
         #region Data
 
         [JsonProperty]

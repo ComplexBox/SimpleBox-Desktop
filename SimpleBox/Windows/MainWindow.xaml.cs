@@ -29,7 +29,7 @@ namespace SimpleBox.Windows
 
             Closing += (sender, args) =>
             {
-                StorageHelper.SaveData(MallowGroup.Current);
+                StorageHelper.SaveData(MallowSource.CurrentSource);
                 ConfigHelper.SaveConfig(Config.Current);
                 UpdateHelper.Current.Dispose();
             };
