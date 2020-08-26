@@ -71,6 +71,7 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\IModified.cs" />
     <Compile Include="Models\Mallow.cs" />
+    <Compile Include="Utils\DateTimeUtils.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
