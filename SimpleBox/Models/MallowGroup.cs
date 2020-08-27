@@ -14,7 +14,7 @@ using SimpleBox.Utils;
 
 namespace SimpleBox.Models
 {
-    [JsonObject]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MallowSource : INotifyPropertyChanged
     {
         #region Current
@@ -70,7 +70,7 @@ namespace SimpleBox.Models
         #endregion
     }
 
-    [JsonObject]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MallowGroup : INotifyPropertyChanged
     {
         #region Data
