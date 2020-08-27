@@ -84,7 +84,19 @@
                         </Grid>
                     </Button>
                 </Grid>
-                <ListBox Grid.Row="2"/>
+                <ListBox Grid.Row="2" ItemsSource="{Binding Data}"
+                         SelectedItem="{Binding Current}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel Margin="6">
+                                    <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"/>
+                                    <TextBlock Margin="0,4" Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -150,7 +162,19 @@
                         </Button.ContextMenu>
                         <controls:FluentIcon Symbol="Import"/>
                     </Button></Grid>
-                <ListBox Grid.Row="1"/>
+                <ListBox Grid.Row="1" ItemsSource="{Binding Current.Mallows}"
+                         SelectedItem="{Binding Current.CurrentMallow}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel Margin="6">
+                                    <TextBlock Margin="0,4" Text="{Binding LocalMessage}"/>
+                                    <TextBlock Margin="0,4" Text="{Binding LocalResponse}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
         </Grid>
         <GridSplitter Grid.Column="3"/>
@@ -166,9 +190,11 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition MinHeight="200"/>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"/>
+                    <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"
+                             Text="{Binding Current.CurrentMallow.LocalMessage}"/>
                     <GridSplitter Grid.Row="1" Background="#10FFFFFF"/>
-                    <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"/>
+                    <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"
+                             Text="{Binding Current.CurrentMallow.LocalResponse}"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>

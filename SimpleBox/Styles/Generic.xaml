@@ -3,7 +3,9 @@
 
     <Style TargetType="ListBox" BasedOn="{StaticResource ListBoxRevealStyle}">
         <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
 
     <Style x:Key="ButtonRevealTransparentStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
