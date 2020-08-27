@@ -41,8 +41,16 @@ namespace SimpleBox.Windows
 
         #region Event Triggers
 
-        private void OpenSettingsButtonBase_OnClick(object sender, RoutedEventArgs e) => SettingsWindow.ShowSettings();
+        private void OpenSettingsButtonClick(object sender, RoutedEventArgs e) => SettingsWindow.ShowSettings();
 
         #endregion
+
+        private void CreateMallowClick(object sender, RoutedEventArgs e)
+        {
+            if (MallowSource.CurrentSource.Current is null) return;
+            Mallow mallow = new Mallow();
+            MallowSource.CurrentSource.Current.Mallows.Add(mallow);
+            MallowSource.CurrentSource.Current.CurrentMallow = mallow;
+        }
     }
 }
