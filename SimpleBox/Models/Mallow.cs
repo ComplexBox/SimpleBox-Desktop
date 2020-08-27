@@ -19,6 +19,7 @@ namespace SimpleBox.Models
         private const string LocalOnlyId = "LOCAL_ONLY";
 
         #endregion
+
         #region Online Data Context
 
         [JsonProperty]
