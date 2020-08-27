@@ -137,10 +137,10 @@
                             HorizontalContentAlignment="Stretch"
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
-                            <ContextMenu>
+                            <fw:AcrylicContextMenu>
                                 <MenuItem Header="新建提问" Click="CreateMallowClick"/>
                                 <MenuItem Header="新建分组"/>
-                            </ContextMenu>
+                            </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -156,9 +156,9 @@
                             ToolTip="导入"
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
-                            <ContextMenu>
+                            <fw:AcrylicContextMenu>
                                 <MenuItem Header="导入单个问题（SimpleBox）" IsEnabled="False"/>
-                            </ContextMenu>
+                            </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <controls:FluentIcon Symbol="Import"/>
                     </Button></Grid>
