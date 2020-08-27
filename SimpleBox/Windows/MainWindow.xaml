@@ -25,11 +25,11 @@
                   Name="RootElement">
     <Grid DataContext="{x:Static models:MallowSource.CurrentSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" MinWidth="250"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="300" MinWidth="200"/>
+            <ColumnDefinition MinWidth="250"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="2*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#80000000">
             <Grid>
