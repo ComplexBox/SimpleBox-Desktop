@@ -6,6 +6,8 @@
                   xmlns:local="clr-namespace:SimpleBox.Windows"
                   xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                   xmlns:controls="clr-namespace:SimpleBox.Controls"
+                  xmlns:utils="clr-namespace:SimpleBox.Utils"
+                  xmlns:models="clr-namespace:SimpleBox.Models"
                   mc:Ignorable="d"
                   Title="SimpleBox"
                   Height="600" Width="1056"
@@ -21,22 +23,69 @@
                   SnapsToDevicePixels="True"
                   fw:PointerTracker.Enabled="True"
                   Name="RootElement">
-    <Grid>
+    <Grid DataContext="{x:Static models:MallowSource.CurrentSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition Width="250" MinWidth="250"/>
             <ColumnDefinition Width="5"/>
-            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition Width="300" MinWidth="200"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#80000000">
-            <Grid Margin="0,32,0,0">
+            <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ListBox Grid.Row="0"/>
+                <Grid Grid.Row="0" Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <controls:FluentIcon Symbol="Sync" Size="2"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Margin="0,4" FontSize="20" Text="已是最新"/>
+                            <TextBlock Margin="0,4" Text="上次同步：尚未"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
                 <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{DynamicResource ButtonAccentRevealTransparentStyle}"
+                            HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Download"/>
+                            <TextBlock Grid.Column="1" Text="立即同步"
+                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                            HorizontalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Settings"/>
+                            <TextBlock Grid.Column="1" Text="同步设置"
+                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <ListBox Grid.Row="2"/>
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
@@ -73,7 +122,14 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            HorizontalContentAlignment="Stretch">
+                            HorizontalContentAlignment="Stretch"
+                            Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="新建提问"/>
+                                <MenuItem Header="新建分组"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -85,7 +141,13 @@
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            ToolTip="导入">
+                            ToolTip="导入"
+                            Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="导入单个问题（SimpleBox）" IsEnabled="False"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
                         <controls:FluentIcon Symbol="Import"/>
                     </Button></Grid>
                 <ListBox Grid.Row="1"/>
