@@ -23,11 +23,13 @@
                   Name="RootElement">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
+            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition MinWidth="200"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="#40000000">
+        <Grid Grid.Column="0" Background="#80000000">
             <Grid Margin="0,32,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -58,7 +60,8 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Background="#A0000000">
+        <GridSplitter Grid.Column="1"/>
+        <Grid Grid.Column="2" Background="#B0000000">
             <Grid Margin="0,32,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -88,7 +91,8 @@
                 <ListBox Grid.Row="1"/>
             </Grid>
         </Grid>
-        <Grid Grid.Column="2" Background="#C0000000">
+        <GridSplitter Grid.Column="3"/>
+        <Grid Grid.Column="4" Background="#C0000000">
             <Grid Margin="0,32,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -96,16 +100,12 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition MinHeight="200"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition MinHeight="200"/>
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"/>
-                    <Grid Grid.Row="1" Height="5">
-                        <Grid Height="1" VerticalAlignment="Center"
-                              Background="White" Opacity="0.1"
-                              Margin="18,0"/>
-                    </Grid>
+                    <GridSplitter Grid.Row="1" Background="#10FFFFFF"/>
                     <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"/>
                 </Grid>
                 <Grid Grid.Row="1">
