@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -39,6 +40,20 @@ namespace SimpleBox.Models
                 _current = value;
                 OnPropertyChanged();
             }
+        }
+
+        #endregion
+
+        #region Serialization Methods
+
+        [OnDeserialized]
+        private void SetValuesOnDeserialized(StreamingContext context)
+        {
+            if (!Data.Any())
+                Data.Add(new MallowGroup
+                {
+                    Name = "默认分组"
+                });
         }
 
         #endregion
