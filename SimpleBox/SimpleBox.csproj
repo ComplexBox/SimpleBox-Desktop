@@ -66,6 +66,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\FluentIcon.cs" />
+    <Compile Include="Core\WebPush.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
