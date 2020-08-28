@@ -74,6 +74,7 @@
     <Compile Include="Models\Mallow.cs" />
     <Compile Include="Models\MallowGroup.cs" />
     <Compile Include="Utils\DateTimeUtils.cs" />
+    <Compile Include="Utils\LimitPropsContractResolver.cs" />
     <Compile Include="Utils\OpenContextMenuCommand.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
