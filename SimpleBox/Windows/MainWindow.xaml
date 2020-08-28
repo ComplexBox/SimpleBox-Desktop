@@ -322,14 +322,15 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                                HorizontalContentAlignment="Stretch">
+                                HorizontalContentAlignment="Stretch"
+                                Click="WebPushClick">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <controls:FluentIcon Grid.Column="0" Symbol="Check" />
-                                <TextBlock Grid.Column="1" Text="显示"
+                                <TextBlock Grid.Column="1" Text="显示" Name="WebPushTextBlock"
                                            Style="{DynamicResource AppBarWideTextStyle}" />
                             </Grid>
                         </Button>

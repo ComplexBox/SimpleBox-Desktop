@@ -103,6 +103,23 @@ namespace SimpleBox.Windows
             MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
         }
 
+        private void WebPushClick(object sender, RoutedEventArgs e)
+        {
+            WebPushTextBlock.Text = "正在推送……";
+            if (MallowSource.CurrentSource.Current is null ||
+                MallowSource.CurrentSource.Current.CurrentMallow is null)
+            {
+                WebPushTextBlock.Text = "显示";
+                return;
+            }
+
+            WebPush.Current.PushMallow(
+                MallowSource.CurrentSource.Current.CurrentMallow,
+                PushMallowCompleted);
+        }
+
+        private async void PushMallowCompleted() => await Dispatcher.InvokeAsync(() => WebPushTextBlock.Text = "已显示");
+
         #endregion
 
         #region Utilities
