@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleBox.Windows"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:models="clr-namespace:SimpleBox.Models"
         mc:Ignorable="d"
         Title="设置"
         Height="600" Width="800"
@@ -19,7 +20,89 @@
         SnapsToDevicePixels="True"
         fw:PointerTracker.Enabled="True"
         Name="RootElement">
+
+    <fw:AcrylicWindow.Resources>
+        <Style x:Key="SectionTextStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,12"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </fw:AcrylicWindow.Resources>
+
     <Grid>
-        
+        <TabControl Margin="6" Style="{DynamicResource SettingsTabControlStyle}">
+            <TabItem Header="通用" Style="{DynamicResource SettingsTabItemStyle}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="24" DataContext="{x:Static models:Config.Current}">
+                        <TextBlock Text="用户信息" Style="{DynamicResource SectionTextStyle}"/>
+                        <TextBlock Text="这些信息将会被保存在此计算机上。" Margin="0,6"/>
+                        <Grid Margin="0,6" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Text="用户名："
+                                       Grid.Column="0"/>
+                            <TextBox Style="{DynamicResource TextBoxRevealStyle}"
+                                     Grid.Column="1" Width="200"
+                                     Text="{Binding Username}"/>
+                        </Grid>
+                        <Grid Margin="0,6" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Text="密码："
+                                       Grid.Column="0"/>
+                            <TextBox Style="{DynamicResource TextBoxRevealStyle}"
+                                     Grid.Column="1" Width="200"
+                                     Text="{Binding Password}"/>
+                        </Grid>
+                        <StackPanel Margin="6,6,6,0" Orientation="Horizontal">
+                            <Button Content="登录" IsEnabled="False"
+                                    Style="{DynamicResource ButtonRevealStyle}"
+                                    Margin="6,0" Padding="12,6"/>
+                            <Button Content="脱机" IsEnabled="False"
+                                    Style="{DynamicResource ButtonRevealStyle}"
+                                    Margin="6,0" Padding="12,6"/>
+                        </StackPanel>
+                        <TextBlock Text="更新" Style="{DynamicResource SectionTextStyle}"/>
+                        <TextBlock Text="请确保您清楚您正在做什么。" Margin="0,6"/>
+                        <Grid Margin="0,6" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Text="更新通道："
+                                       Grid.Column="0"/>
+                            <TextBox Style="{DynamicResource TextBoxRevealStyle}"
+                                     Grid.Column="1" Width="400"
+                                     Text="{Binding UpdateServer}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="关于" Style="{DynamicResource SettingsTabItemStyle}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Margin="0,-48,0,48">
+                    <Image Source="../Assets/SimpleBox.Colored.Transparent.png" Width="200"
+                           Margin="0,6"/>
+                    <TextBlock Text="SimpleBox" FontSize="24"
+                               HorizontalAlignment="Center" Margin="0,6"/>
+                    <TextBlock Text="{Binding AppVersion, ElementName=RootElement}"
+                               HorizontalAlignment="Center" Margin="0,6"/>
+                    <TextBlock Text="© 2020 Il Harper。保留所有权利。"
+                               HorizontalAlignment="Center" Margin="0,6"/>
+                    <TextBlock Text="此产品的开源项目中所使用的一切第三方项目之权利均归其所有者所有。"
+                               HorizontalAlignment="Center" Margin="0,6"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </fw:AcrylicWindow>
