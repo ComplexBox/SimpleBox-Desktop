@@ -78,6 +78,15 @@ namespace SimpleBox.Windows
         private void OpenSyncSettingsPopupClick(object sender, RoutedEventArgs e) =>
             ShowPopup(SyncSettingsPopup, SyncSettingsButton);
 
+        private void GroupRenameClick(object sender, RoutedEventArgs e)
+        {
+            if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is MallowGroup group)) return;
+
+            string result = RenameWindow.Rename(group.Name);
+            if (!string.IsNullOrEmpty(result))
+                group.Name = result;
+        }
+
         #endregion
 
         #region Utilities

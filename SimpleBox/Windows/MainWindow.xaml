@@ -92,6 +92,11 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
+                                <Grid.ContextMenu>
+                                    <fw:AcrylicContextMenu>
+                                        <MenuItem Header="重命名" Click="GroupRenameClick"/>
+                                    </fw:AcrylicContextMenu>
+                                </Grid.ContextMenu>
                                 <StackPanel Margin="6">
                                     <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"/>
                                     <TextBlock Margin="0,4" Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}"/>
@@ -164,7 +169,8 @@
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <controls:FluentIcon Symbol="Import"/>
-                    </Button></Grid>
+                    </Button>
+                </Grid>
                 <ListBox Grid.Row="1" ItemsSource="{Binding Current.Mallows}"
                          SelectedItem="{Binding Current.CurrentMallow}">
                     <ListBox.ItemTemplate>
@@ -226,3 +232,4 @@
         </fw:AcrylicPopup>
     </Grid>
 </fw:AcrylicWindow>
+    
