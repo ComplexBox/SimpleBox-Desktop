@@ -9,7 +9,7 @@ namespace SimpleBox.Utils
     {
         private const long InitialJavaScriptDateTicks = 621355968000000000;
 
-        public static long ConvertDateToJsTicks(DateTime dateTime, bool convertToUtc = true)
+        public static long ConvertDateToJsTicks(DateTime dateTime)
         {
             TimeSpan offset = TimeZoneInfo.Local.GetUtcOffset(dateTime);
             long ret;
@@ -24,11 +24,9 @@ namespace SimpleBox.Utils
                     ret = num < 0L ? 0L : num;
             }
 
-            return ((convertToUtc
-                ? dateTime.Kind == DateTimeKind.Utc
-                    ? dateTime.Ticks
-                    : ret
-                : dateTime.Ticks) - InitialJavaScriptDateTicks) / 10000L;
+            return ((dateTime.Kind == DateTimeKind.Utc
+                ? dateTime.Ticks
+                : ret) - InitialJavaScriptDateTicks) / 10000L;
         }
 
         public static DateTime ConvertJsTicksToDate(long value) =>
