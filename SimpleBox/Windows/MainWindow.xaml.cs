@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
+using SourceChord.FluentWPF;
 
 namespace SimpleBox.Windows
 {
@@ -71,6 +73,20 @@ namespace SimpleBox.Windows
             };
             MallowSource.CurrentSource.Data.Insert(0, group);
             MallowSource.CurrentSource.Current = group;
+        }
+
+        private void OpenSyncSettingsPopupClick(object sender, RoutedEventArgs e) =>
+            ShowPopup(SyncSettingsPopup, SyncSettingsButton);
+
+        #endregion
+
+        #region Utilities
+
+        private static void ShowPopup(Popup popup, UIElement placementTarget)
+        {
+            popup.IsOpen = false;
+            popup.PlacementTarget = placementTarget;
+            popup.IsOpen = true;
         }
 
         #endregion

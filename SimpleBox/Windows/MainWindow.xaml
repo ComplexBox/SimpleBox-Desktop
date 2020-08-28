@@ -73,7 +73,9 @@
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            HorizontalContentAlignment="Stretch">
+                            HorizontalContentAlignment="Stretch"
+                            Click="OpenSyncSettingsPopupClick"
+                            Name="SyncSettingsButton">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -218,5 +220,9 @@
                 </Grid>
             </Grid>
         </Grid>
+        <fw:AcrylicPopup Name="SyncSettingsPopup">
+            <Grid Background="#A0000000">
+            </Grid>
+        </fw:AcrylicPopup>
     </Grid>
 </fw:AcrylicWindow>

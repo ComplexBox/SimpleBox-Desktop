@@ -27,6 +27,11 @@
         <Setter Property="Margin" Value="4,0" />
     </Style>
 
+    <Style TargetType="fw:AcrylicPopup" BasedOn="{StaticResource {x:Type fw:AcrylicPopup}}">
+        <Setter Property="StaysOpen" Value="False"/>
+        <Setter Property="AllowsTransparency" Value="True"/>
+    </Style>
+
     <Style x:Key="MainEditTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="0" />
