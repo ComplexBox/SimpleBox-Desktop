@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,6 +57,7 @@ namespace SimpleBox.Windows
         {
             if (MallowSource.CurrentSource.Current is null) return;
             Mallow mallow = new Mallow();
+            mallow.SetValuesOnDeserialized(new StreamingContext());
             MallowSource.CurrentSource.Current.Mallows.Add(mallow);
             MallowSource.CurrentSource.Current.CurrentMallow = mallow;
         }

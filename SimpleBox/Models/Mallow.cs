@@ -79,7 +79,7 @@ namespace SimpleBox.Models
 
         [JsonProperty]
         [JsonConverter(typeof(MallowDateTimeConverter))]
-        private DateTime? createTime;
+        private DateTime? createTime = DateTime.Now;
 
         public DateTime? OriginalCreateTime
         {
@@ -93,7 +93,7 @@ namespace SimpleBox.Models
 
         [JsonProperty]
         [JsonConverter(typeof(MallowDateTimeConverter))]
-        private DateTime? responseTime;
+        private DateTime? responseTime = DateTime.Now;
 
         public DateTime? OriginalResponseTime
         {
@@ -164,7 +164,7 @@ namespace SimpleBox.Models
 
         [JsonProperty]
         [JsonConverter(typeof(MallowDateTimeConverter))]
-        private DateTime? localCreateTime;
+        private DateTime? localCreateTime = DateTime.Now;
 
         public DateTime? LocalCreateTime
         {
@@ -178,7 +178,7 @@ namespace SimpleBox.Models
 
         [JsonProperty]
         [JsonConverter(typeof(MallowDateTimeConverter))]
-        private DateTime? localResponseTime;
+        private DateTime? localResponseTime = DateTime.Now;
 
         public DateTime? LocalResponseTime
         {
@@ -195,7 +195,7 @@ namespace SimpleBox.Models
         #region Serialization Methods
 
         [OnDeserialized]
-        private void SetValuesOnDeserialized(StreamingContext context)
+        public void SetValuesOnDeserialized(StreamingContext context)
         {
             IsLocal = Id == LocalOnlyId;
             if (string.IsNullOrEmpty(LocalMessage))

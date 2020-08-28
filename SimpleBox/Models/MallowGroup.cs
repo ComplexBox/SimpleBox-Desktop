@@ -47,7 +47,7 @@ namespace SimpleBox.Models
         #region Serialization Methods
 
         [OnDeserialized]
-        private void SetValuesOnDeserialized(StreamingContext context)
+        public void SetValuesOnDeserialized(StreamingContext context)
         {
             if (!Data.Any())
                 Data.Add(new MallowGroup
