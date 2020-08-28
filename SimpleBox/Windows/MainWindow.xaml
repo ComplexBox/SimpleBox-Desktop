@@ -23,67 +23,72 @@
                   SnapsToDevicePixels="True"
                   fw:PointerTracker.Enabled="True"
                   Name="RootElement">
+
+    <fw:AcrylicWindow.Resources>
+        <utils:SingleLineTextConverter x:Key="SingleLineTextConverter"/>
+    </fw:AcrylicWindow.Resources>
+
     <Grid DataContext="{x:Static models:MallowSource.CurrentSource}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="250"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition MinWidth="200"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="2*" MinWidth="200"/>
+            <ColumnDefinition MinWidth="250" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition MinWidth="200" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="2*" MinWidth="200" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#80000000">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Height="100"
                       Name="WndTitleArea">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <controls:FluentIcon Symbol="Sync" Size="2"/>
+                        <controls:FluentIcon Symbol="Sync" Size="2" />
                     </Grid>
                     <Grid Grid.Column="1">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Margin="0,4" FontSize="20" Text="已是最新"/>
-                            <TextBlock Margin="0,4" Text="上次同步：尚未"/>
+                            <TextBlock Margin="0,4" FontSize="20" Text="脱机" />
+                            <TextBlock Margin="0,4" Text="上次同步：尚未" />
                         </StackPanel>
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Style="{DynamicResource ButtonAccentRevealTransparentStyle}"
-                            HorizontalContentAlignment="Stretch">
+                            HorizontalContentAlignment="Stretch" IsEnabled="False">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <controls:FluentIcon Grid.Column="0" Symbol="Download"/>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Download" />
                             <TextBlock Grid.Column="1" Text="立即同步"
-                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                                       Style="{DynamicResource AppBarWideTextStyle}" />
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
                             HorizontalContentAlignment="Stretch"
                             Click="OpenSyncSettingsPopupClick"
-                            Name="SyncSettingsButton">
+                            Name="SyncSettingsButton" IsEnabled="False">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <controls:FluentIcon Grid.Column="0" Symbol="Settings"/>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Settings" />
                             <TextBlock Grid.Column="1" Text="同步设置"
-                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                                       Style="{DynamicResource AppBarWideTextStyle}" />
                         </Grid>
                     </Button>
                 </Grid>
@@ -91,16 +96,18 @@
                          SelectedItem="{Binding Current}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                                 <Grid.ContextMenu>
                                     <fw:AcrylicContextMenu>
-                                        <MenuItem Header="重命名" Click="GroupRenameClick"/>
-                                        <MenuItem Header="删除" Click="GroupDeleteClick"/>
+                                        <MenuItem Header="重命名" Click="GroupRenameClick" />
+                                        <MenuItem Header="删除" Click="GroupDeleteClick" />
                                     </fw:AcrylicContextMenu>
                                 </Grid.ContextMenu>
                                 <StackPanel Margin="6">
-                                    <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"/>
-                                    <TextBlock Margin="0,4" Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}"/>
+                                    <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Margin="0,4"
+                                               Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -108,57 +115,57 @@
                 </ListBox>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            HorizontalContentAlignment="Stretch">
+                            HorizontalContentAlignment="Stretch" IsEnabled="False">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <controls:FluentIcon Grid.Column="0" Symbol="Person"/>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Person" />
                             <TextBlock Grid.Column="1" Text="登录"
-                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                                       Style="{DynamicResource AppBarWideTextStyle}" />
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
                             Click="OpenSettingsButtonClick" ToolTip="设置">
-                        <controls:FluentIcon Symbol="Settings"/>
+                        <controls:FluentIcon Symbol="Settings" />
                     </Button>
                 </Grid>
             </Grid>
         </Grid>
-        <GridSplitter Grid.Column="1"/>
+        <GridSplitter Grid.Column="1" />
         <Grid Grid.Column="2" Background="#B0000000">
             <Grid Margin="0,32,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
                             HorizontalContentAlignment="Stretch"
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
-                                <MenuItem Header="新建提问" Click="CreateMallowClick"/>
-                                <MenuItem Header="新建分组" Click="CreateMallowGroupClick"/>
+                                <MenuItem Header="新建提问" Click="CreateMallowClick" />
+                                <MenuItem Header="新建分组" Click="CreateMallowGroupClick" />
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <controls:FluentIcon Grid.Column="0" Symbol="Add"/>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Add" />
                             <TextBlock Grid.Column="1" Text="新建"
-                                       Style="{DynamicResource AppBarWideTextStyle}"/>
+                                       Style="{DynamicResource AppBarWideTextStyle}" />
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
@@ -166,75 +173,173 @@
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
-                                <MenuItem Header="导入单个问题（SimpleBox）" IsEnabled="False"/>
+                                <MenuItem Header="导入单个问题（SimpleBox）" IsEnabled="False" />
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
-                        <controls:FluentIcon Symbol="Import"/>
+                        <controls:FluentIcon Symbol="Import" />
                     </Button>
-                </Grid>
-                <ListBox Grid.Row="1" ItemsSource="{Binding Current.Mallows}"
-                         SelectedItem="{Binding Current.CurrentMallow}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ContextMenu>
-                                    <fw:AcrylicContextMenu>
-                                        <MenuItem Header="删除" Click="MallowDeleteClick"/>
-                                    </fw:AcrylicContextMenu>
-                                </Grid.ContextMenu>
-                                <StackPanel Margin="6">
-                                    <TextBlock Margin="0,4" Text="{Binding LocalMessage}"/>
-                                    <TextBlock Margin="0,4" Text="{Binding LocalResponse}"/>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </Grid>
-        </Grid>
-        <GridSplitter Grid.Column="3"/>
-        <Grid Grid.Column="4" Background="#C0000000">
-            <Grid Margin="0,32,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition MinHeight="200"/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition MinHeight="200"/>
-                    </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"
-                             Text="{Binding Current.CurrentMallow.LocalMessage, UpdateSourceTrigger=PropertyChanged}"/>
-                    <GridSplitter Grid.Row="1" Background="#10FFFFFF"/>
-                    <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"
-                             Text="{Binding Current.CurrentMallow.LocalResponse, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            HorizontalContentAlignment="Stretch">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <controls:FluentIcon Grid.Column="0" Symbol="Check"/>
-                            <TextBlock Grid.Column="1" Text="显示"
-                                       Style="{DynamicResource AppBarWideTextStyle}"/>
-                        </Grid>
-                    </Button>
-                    <StackPanel Orientation="Horizontal" Grid.Column="1"/>
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Current}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Current.Mallows.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <ListBox ItemsSource="{Binding Current.Mallows}"
+                                 SelectedItem="{Binding Current.CurrentMallow}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Grid.ContextMenu>
+                                            <fw:AcrylicContextMenu>
+                                                <MenuItem Header="删除" Click="MallowDeleteClick" />
+                                            </fw:AcrylicContextMenu>
+                                        </Grid.ContextMenu>
+                                        <StackPanel Margin="6">
+                                            <Grid Margin="0,4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="8"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding LocalMessage, Converter={StaticResource SingleLineTextConverter}}"
+                                                           FontSize="16" FontWeight="Bold"
+                                                           Grid.Column="0"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding LocalCreateTime, StringFormat='MM/dd HH:mm'}"
+                                                           Grid.Column="2"/>
+                                            </Grid>
+                                            <Grid Height="1" Background="White"
+                                                  Opacity="0.3"/>
+                                            <Grid Margin="0,4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="8"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding LocalResponse, Converter={StaticResource SingleLineTextConverter}}"
+                                                           FontSize="14"
+                                                           Grid.Column="0"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding LocalResponseTime, StringFormat='MM/dd HH:mm'}"
+                                                           Grid.Column="2"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Current}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Current.Mallows.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Margin="24,0" Opacity="0.5">
+                            <controls:FluentIcon Symbol="MailInbox" Size="4"
+                                                 Margin="0,6"
+                                                 HorizontalContentAlignment="Center" />
+                            <TextBlock Text="轻敲「新建」创建问题，或轻敲「导入」导入问题。"
+                                       Margin="0,6" TextWrapping="Wrap"
+                                       HorizontalAlignment="Center" FontSize="14" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Column="3" />
+        <Grid Grid.Column="4">
+            <Grid Background="#60000000">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Current}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Current.CurrentMallow}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+            </Grid>
+            <Grid Background="#C0000000">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Current}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Current.CurrentMallow}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid Margin="0,32,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="200" />
+                            <RowDefinition Height="5" />
+                            <RowDefinition MinHeight="200" />
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"
+                                 Text="{Binding Current.CurrentMallow.LocalMessage, UpdateSourceTrigger=PropertyChanged}"
+                                 TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <GridSplitter Grid.Row="1" Background="#10FFFFFF" />
+                        <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"
+                                 Text="{Binding Current.CurrentMallow.LocalResponse, UpdateSourceTrigger=PropertyChanged}"
+                                 TextWrapping="Wrap" AcceptsReturn="True"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                                HorizontalContentAlignment="Stretch">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <controls:FluentIcon Grid.Column="0" Symbol="Check" />
+                                <TextBlock Grid.Column="1" Text="显示"
+                                           Style="{DynamicResource AppBarWideTextStyle}" />
+                            </Grid>
+                        </Button>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" />
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
         <fw:AcrylicPopup Name="SyncSettingsPopup">
-            <Grid Background="#A0000000">
-            </Grid>
+            <Grid Background="#A0000000" />
         </fw:AcrylicPopup>
     </Grid>
 </fw:AcrylicWindow>
