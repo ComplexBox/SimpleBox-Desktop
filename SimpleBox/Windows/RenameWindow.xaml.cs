@@ -33,6 +33,7 @@ namespace SimpleBox.Windows
                     Text = origin
                 }
             };
+            window.RenameTextBox.Focus();
             window.ShowDialog();
             return window.RenameTextBox.Text;
         }
