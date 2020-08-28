@@ -5,11 +5,11 @@ using Newtonsoft.Json.Linq;
 
 namespace SimpleBox.Utils
 {
-    internal static class DateTimeUtils
+    public static class DateTimeUtils
     {
-        public const long InitialJavaScriptDateTicks = 621355968000000000;
+        private const long InitialJavaScriptDateTicks = 621355968000000000;
 
-        internal static long ConvertDateToJsTicks(DateTime dateTime, bool convertToUtc = true)
+        public static long ConvertDateToJsTicks(DateTime dateTime, bool convertToUtc = true)
         {
             TimeSpan offset = TimeZoneInfo.Local.GetUtcOffset(dateTime);
             long ret;
@@ -30,6 +30,9 @@ namespace SimpleBox.Utils
                     : ret
                 : dateTime.Ticks) - InitialJavaScriptDateTicks) / 10000L;
         }
+
+        public static DateTime ConvertJsTicksToDate(long value) =>
+            new DateTime(value * 10000L + InitialJavaScriptDateTicks, DateTimeKind.Utc).ToLocalTime();
     }
 
     public sealed class MallowDateTimeConverter : DateTimeConverterBase
@@ -49,7 +52,7 @@ namespace SimpleBox.Utils
         {
             if (reader.TokenType == JsonToken.Null)
                 return null;
-            return new DateTime((long)JToken.Load(reader) * 10000L + DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc).ToLocalTime();
+            return DateTimeUtils.ConvertJsTicksToDate((long) JToken.Load(reader));
         }
     }
 }
