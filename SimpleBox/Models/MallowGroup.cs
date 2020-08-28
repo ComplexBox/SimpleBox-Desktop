@@ -85,6 +85,7 @@ namespace SimpleBox.Models
             {
                 name = value;
                 OnPropertyChanged();
+                TriggerModified();
             }
         }
 
@@ -133,6 +134,8 @@ namespace SimpleBox.Models
 
         private void OnMallowCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            TriggerModified();
+
             if (e.Action != NotifyCollectionChangedAction.Add &&
                 e.Action != NotifyCollectionChangedAction.Replace) return;
 
