@@ -140,7 +140,7 @@
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
                                 <MenuItem Header="新建提问" Click="CreateMallowClick"/>
-                                <MenuItem Header="新建分组"/>
+                                <MenuItem Header="新建分组" Click="CreateMallowGroupClick"/>
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <Grid>

@@ -58,8 +58,19 @@ namespace SimpleBox.Windows
             if (MallowSource.CurrentSource.Current is null) return;
             Mallow mallow = new Mallow();
             mallow.SetValuesOnDeserialized(new StreamingContext());
-            MallowSource.CurrentSource.Current.Mallows.Add(mallow);
+            MallowSource.CurrentSource.Current.Mallows.Insert(0, mallow);
             MallowSource.CurrentSource.Current.CurrentMallow = mallow;
+        }
+
+        private void CreateMallowGroupClick(object sender, RoutedEventArgs e)
+        {
+            MallowGroup group = new MallowGroup
+            {
+                Name = "新分组",
+                ModifiedTime = DateTime.Now
+            };
+            MallowSource.CurrentSource.Data.Insert(0, group);
+            MallowSource.CurrentSource.Current = group;
         }
 
         #endregion
