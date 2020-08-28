@@ -18,4 +18,12 @@ namespace SimpleBox.Utils
             base.CreateProperties(type, memberSerialization).Where(p => _props.Contains(p.PropertyName))
                 .ToList();
     }
+
+    [AttributeUsage(AttributeTargets.Class)]
+    sealed class LimitPropsAttribute : Attribute
+    {
+        public LimitPropsAttribute(string[] props) => Props = props;
+
+        public string[] Props;
+    }
 }
