@@ -85,7 +85,7 @@ namespace SimpleBox.Windows
             p.X = (pInt << 16) >> 16;
             p.Y = pInt >> 16;
             Point rel = WndTitleArea.PointFromScreen(p);
-            bool inside = PointFromScreen(p).Y <= 32 || rel.X >= 0 && rel.X <= WndTitleArea.ActualWidth && rel.Y >= 0 &&
+            bool inside = rel.X >= 0 && rel.X <= WndTitleArea.ActualWidth && rel.Y >= 0 &&
                           rel.Y <= WndTitleArea.ActualHeight;
             if (!inside) return IntPtr.Zero;
             handled = true;
