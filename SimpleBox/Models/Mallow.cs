@@ -61,6 +61,8 @@ namespace SimpleBox.Models
             {
                 msg = value;
                 OnPropertyChanged();
+                OriginalCreateTime = DateTime.Now;
+                LocalCreateTime = DateTime.Now;
             }
         }
 
@@ -74,6 +76,8 @@ namespace SimpleBox.Models
             {
                 response = value;
                 OnPropertyChanged();
+                OriginalResponseTime = DateTime.Now;
+                LocalResponseTime = DateTime.Now;
             }
         }
 
@@ -145,6 +149,7 @@ namespace SimpleBox.Models
                 localMsg = value;
                 Modified = true;
                 OnPropertyChanged();
+                LocalCreateTime = DateTime.Now;
             }
         }
 
@@ -159,6 +164,7 @@ namespace SimpleBox.Models
                 localResponse = value;
                 Modified = true;
                 OnPropertyChanged();
+                LocalResponseTime = DateTime.Now;
             }
         }
 
