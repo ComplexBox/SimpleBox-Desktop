@@ -95,6 +95,7 @@
                                 <Grid.ContextMenu>
                                     <fw:AcrylicContextMenu>
                                         <MenuItem Header="重命名" Click="GroupRenameClick"/>
+                                        <MenuItem Header="删除" Click="GroupDeleteClick"/>
                                     </fw:AcrylicContextMenu>
                                 </Grid.ContextMenu>
                                 <StackPanel Margin="6">
@@ -176,6 +177,11 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
+                                <Grid.ContextMenu>
+                                    <fw:AcrylicContextMenu>
+                                        <MenuItem Header="删除" Click="MallowDeleteClick"/>
+                                    </fw:AcrylicContextMenu>
+                                </Grid.ContextMenu>
                                 <StackPanel Margin="6">
                                     <TextBlock Margin="0,4" Text="{Binding LocalMessage}"/>
                                     <TextBlock Margin="0,4" Text="{Binding LocalResponse}"/>

@@ -87,6 +87,20 @@ namespace SimpleBox.Windows
                 group.Name = result;
         }
 
+        private void GroupDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is MallowGroup group)) return;
+
+            MallowSource.CurrentSource.Data.Remove(group);
+        }
+
+        private void MallowDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is Mallow mallow)) return;
+
+            MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
+        }
+
         #endregion
 
         #region Utilities
