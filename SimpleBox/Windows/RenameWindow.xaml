@@ -1,0 +1,32 @@
+﻿<fw:AcrylicWindow x:Class="SimpleBox.Windows.RenameWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:local="clr-namespace:SimpleBox.Windows"
+                  xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+                  mc:Ignorable="d"
+                  Title="重命名"
+                  Height="200" Width="300"
+                  ResizeMode="NoResize"
+                  AcrylicWindowStyle="NoIcon"
+                  TextOptions.TextFormattingMode="Display"
+                  Icon="/SimpleBox;component/Assets/SimpleBox.Colored.Transparent.ico"
+                  Foreground="White"
+                  UseLayoutRounding="True"
+                  NoiseOpacity="0"
+                  SnapsToDevicePixels="True"
+                  fw:PointerTracker.Enabled="True">
+    <StackPanel VerticalAlignment="Center" Margin="24">
+        <TextBox Name="RenameTextBox" Margin="0,6" Style="{DynamicResource TextBoxRevealStyle}" />
+        <StackPanel Margin="0,6" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="确定" Margin="6,0"
+                        Style="{DynamicResource ButtonRevealTransparentStyle}"
+                        Padding="12,6" Click="ApplyButtonClick" />
+            <Button Content="取消" Margin="6,0"
+                        Style="{DynamicResource ButtonRevealTransparentStyle}"
+                        Padding="12,6" Click="CancelButtonClick" />
+        </StackPanel>
+    </StackPanel>
+</fw:AcrylicWindow>
+    
