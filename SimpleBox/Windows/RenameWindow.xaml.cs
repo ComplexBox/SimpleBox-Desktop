@@ -44,5 +44,12 @@ namespace SimpleBox.Windows
             RenameTextBox.Text = "";
             Close();
         }
+
+        private void RenameTextBox_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            e.Handled = true;
+            Close();
+        }
     }
 }

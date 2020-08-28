@@ -18,7 +18,8 @@
                   SnapsToDevicePixels="True"
                   fw:PointerTracker.Enabled="True">
     <StackPanel VerticalAlignment="Center" Margin="24">
-        <TextBox Name="RenameTextBox" Margin="0,6" Style="{DynamicResource TextBoxRevealStyle}" />
+        <TextBox Name="RenameTextBox" Margin="0,6" Style="{DynamicResource TextBoxRevealStyle}"
+                 PreviewKeyDown="RenameTextBox_OnPreviewKeyDown"/>
         <StackPanel Margin="0,6" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="确定" Margin="6,0"
                         Style="{DynamicResource ButtonRevealTransparentStyle}"
