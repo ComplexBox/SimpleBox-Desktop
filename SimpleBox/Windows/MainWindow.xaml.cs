@@ -14,6 +14,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SourceChord.FluentWPF;
@@ -35,6 +36,7 @@ namespace SimpleBox.Windows
             {
                 StorageHelper.SaveData(MallowSource.CurrentSource);
                 ConfigHelper.SaveConfig(Config.Current);
+                WebPush.Current.Stop();
                 UpdateHelper.Current.Dispose();
             };
 

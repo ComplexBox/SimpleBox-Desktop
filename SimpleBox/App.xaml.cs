@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using SimpleBox.Core;
 using SimpleBox.Models;
 using SimpleBox.Windows;
 using SourceChord.FluentWPF;
@@ -66,6 +67,22 @@ namespace SimpleBox
             }
 
             SimpleBox.Properties.Resources.Culture = CultureInfo.CurrentUICulture;
+
+            // Initialize WebPush
+
+            WebPush.Current = new WebPush();
+            WebPush.Current.Start();
+
+            if (!WebPush.Current.IsListening)
+            {
+                MessageBox.Show(
+                    "信息推送服务无法启动。请检查端口占用。程序即将退出。",
+                    "错误",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error,
+                    MessageBoxResult.OK);
+                Current.Shutdown(1);
+            }
 
             // Force Dark Theme
 
