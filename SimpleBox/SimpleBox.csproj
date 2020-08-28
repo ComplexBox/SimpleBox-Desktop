@@ -127,6 +127,9 @@
     <PackageReference Include="squirrel.windows">
       <Version>1.9.1</Version>
     </PackageReference>
+    <PackageReference Include="WebSocketSharp">
+      <Version>1.0.3-rc11</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Assets\SimpleBox.Splash.png" />
