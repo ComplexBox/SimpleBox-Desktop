@@ -27,10 +27,10 @@ namespace SimpleBox.Core
 
         #region Temporary Data
 
-        private JObject _lastMessage = new JObject
+        private JObject _lastMessage = JObject.FromObject(new
         {
-            ["type"] = "heart"
-        };
+            type = "heart"
+        });
 
         #endregion
 
@@ -76,22 +76,21 @@ namespace SimpleBox.Core
         public void PushMallow(Mallow mallow, Action completed)
         {
             if (mallow is null) return;
-            Push(new JObject
+            Push(JObject.FromObject(new
+            {
+                type = "msg",
+                data = new
                 {
-                    ["type"] = "msg",
-                    ["data"] =
-                    {
-                        ["msg"] = mallow.LocalMessage,
-                        ["response"] = mallow.LocalResponse,
-                        ["createTime"] = mallow.LocalCreateTime is null
-                            ? 0
-                            : DateTimeUtils.ConvertDateToJsTicks((DateTime) mallow.LocalCreateTime),
-                        ["responseTime"] = mallow.LocalResponseTime is null
-                            ? 0
-                            : DateTimeUtils.ConvertDateToJsTicks((DateTime) mallow.LocalResponseTime)
-                    }
-                },
-                completed);
+                    msg = mallow.LocalMessage,
+                    response = mallow.LocalResponse,
+                    createTime = mallow.LocalCreateTime is null
+                    ? 0
+                    : DateTimeUtils.ConvertDateToJsTicks((DateTime) mallow.LocalCreateTime),
+                    responseTime = mallow.LocalResponseTime is null
+                    ? 0
+                    : DateTimeUtils.ConvertDateToJsTicks((DateTime) mallow.LocalResponseTime)
+                }
+            }), completed);
         }
 
         #endregion
