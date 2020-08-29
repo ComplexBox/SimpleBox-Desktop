@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -14,6 +15,8 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
@@ -119,6 +122,59 @@ namespace SimpleBox.Windows
         }
 
         private async void PushMallowCompleted() => await Dispatcher.InvokeAsync(() => WebPushTextBlock.Text = "已显示");
+
+        private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog()
+            {
+                Title = "选择Manager导出文件",
+                DefaultDirectory = Environment.CurrentDirectory,
+                IsFolderPicker = false,
+                DefaultExtension = ".json",
+                Filters =
+                {
+                    new CommonFileDialogFilter("Manager导出文件", ".json")
+                },
+                EnsureFileExists = true,
+                EnsurePathExists = true,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
+
+            string fileName = dialog.FileName;
+
+            List<Mallow> mallows;
+
+            try
+            {
+                mallows = JsonConvert.DeserializeObject<List<Mallow>>(File.ReadAllText(fileName));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"导入数据时发生错误：{exception.Message}",
+                    "错误",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error,
+                    MessageBoxResult.OK);
+
+                return;
+            }
+
+            if (MallowSource.CurrentSource.Current is null)
+            {
+                MallowGroup group = new MallowGroup
+                {
+                    Name = "Manager导入"
+                };
+                MallowSource.CurrentSource.Data.Insert(0, group);
+                MallowSource.CurrentSource.Current = group;
+            }
+
+            for (int i = 0; i < mallows.Count; i++)
+                MallowSource.CurrentSource.Current.Mallows.Insert(i, mallows[i]);
+        }
 
         #endregion
 

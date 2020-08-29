@@ -173,7 +173,7 @@
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
-                                <MenuItem Header="导入单个问题（SimpleBox）" IsEnabled="False" />
+                                <MenuItem Header="从SimpleBox Manager导入" Click="ImportFromSimpleBoxManagerClick" />
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <controls:FluentIcon Symbol="Import" />
