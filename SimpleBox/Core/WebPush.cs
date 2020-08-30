@@ -39,7 +39,7 @@ namespace SimpleBox.Core
         public WebPush()
         {
             _server = new WebSocketServer(19101);
-            _server.AddWebSocketService<MallowWebSocketBehavior>("/");
+            _server.AddWebSocketService<MallowWebSocketBehavior>("/socket");
         }
 
         #endregion
