@@ -22,7 +22,7 @@ namespace SimpleBox.Models
         #region Update
 
         [JsonProperty]
-        private string updateServer = "https://simplebox.vbox.moe/stable";
+        private string updateServer = "https://update.simplebox.vbox.moe/stable";
 
         public string UpdateServer
         {
