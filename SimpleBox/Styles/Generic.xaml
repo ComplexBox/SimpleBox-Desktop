@@ -175,7 +175,7 @@
         <Setter Property="Text" Value="更新服务出现问题。" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding UpdateMode}" Value="ready">
-                <Setter Property="Text" Value="Ruminoid已是最新版本。"/>
+                <Setter Property="Text" Value="SimpleBox已是最新版本。"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding UpdateMode}" Value="search">
                 <Setter Property="Text" Value="正在检查更新。"/>
