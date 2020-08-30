@@ -174,7 +174,7 @@
     <Message Text="Starting nuget pack..." />
     <Exec Command="nuget pack $(MSBuildProjectDirectory)\..\NuGet\SimpleBox.nuspec -Version %(myAssemblyInfo.Version) -Properties Configuration=Release -OutputDirectory $(MSBuildProjectDirectory)\..\NuGet\ -BasePath $(MSBuildProjectDirectory)\..\NuGet\" />
     <Message Text="Starting Squirrel pack..." />
-    <Exec Command="Squirrel --releasify $(MSBuildProjectDirectory)\..\NuGet\SimpleBox.$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg -g $(MSBuildProjectDirectory)\..\Assets\Installing.gif --setupIcon $(MSBuildProjectDirectory)\Assets\Icon.ico -r $(MSBuildProjectDirectory)\..\Releases\" />
+    <Exec Command="Squirrel --releasify $(MSBuildProjectDirectory)\..\NuGet\SimpleBox.$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg -g $(MSBuildProjectDirectory)\..\Assets\Installing.gif --setupIcon $(MSBuildProjectDirectory)\..\Assets\Icon.ico -r $(MSBuildProjectDirectory)\..\Releases\" />
     <Message Text="AfterBuild complete." />
   </Target>
 </Project>
