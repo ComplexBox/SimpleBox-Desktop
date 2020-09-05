@@ -26,4 +26,35 @@
         </Setter>
     </Style>
 
+    <Style TargetType="local:FluentMenuIcon">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Size" Value="0.7"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:FluentIcon">
+                    <Path x:Name="IconDisplay"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          Fill="{DynamicResource SystemBaseHighColorBrush}"
+                          Stroke="{x:Null}"
+                          Width="24"
+                          Height="24"
+                          MaxWidth="{TemplateBinding MaxWidth}"
+                          MaxHeight="{TemplateBinding MaxHeight}"
+                          MinWidth="{TemplateBinding MinWidth}"
+                          MinHeight="{TemplateBinding MinHeight}"
+                          Margin="{TemplateBinding Margin}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          UseLayoutRounding="{TemplateBinding UseLayoutRounding}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
+    

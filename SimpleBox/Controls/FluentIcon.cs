@@ -12,7 +12,7 @@ using NuGet;
 
 namespace SimpleBox.Controls
 {
-    public sealed class FluentIcon : Control
+    public class FluentIcon : Control
     {
         private Path _iconDisplay;
 
@@ -101,6 +101,11 @@ namespace SimpleBox.Controls
         }
 
         #endregion
+    }
+
+    public class FluentMenuIcon : FluentIcon
+    {
+
     }
 
     [JsonObject(MemberSerialization.OptIn)]
