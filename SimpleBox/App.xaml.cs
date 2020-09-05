@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using SimpleBox.Core;
+using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SimpleBox.Windows;
 using SourceChord.FluentWPF;
@@ -67,6 +68,10 @@ namespace SimpleBox
             }
 
             SimpleBox.Properties.Resources.Culture = CultureInfo.CurrentUICulture;
+
+            // Initialize UpdateHelper
+
+            string updateMode = UpdateHelper.Current.UpdateMode;
 
             // Initialize WebPush
 
