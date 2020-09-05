@@ -124,10 +124,16 @@ namespace SimpleBox.Windows
         private async void PushMallowCompleted() => await Dispatcher.InvokeAsync(() => WebPushTextBlock.Text = "已显示");
 
         private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e) =>
-            ImportHelper.Import(new SimpleBoxImporter());
+            ImportExportHelper.Import(new SimpleBoxImporter());
 
         private void ImportFromMarsherClick(object sender, RoutedEventArgs e) =>
-            ImportHelper.Import(new MarsherImporter());
+            ImportExportHelper.Import(new MarsherImporter());
+
+        private void ExportGroupClick(object sender, RoutedEventArgs e)
+        {
+            if (MallowSource.CurrentSource.Current != null && MallowSource.CurrentSource.Current.Mallows.Any())
+                ImportExportHelper.Export(MallowSource.CurrentSource.Current.Mallows.ToList());
+        }
 
         #endregion
 

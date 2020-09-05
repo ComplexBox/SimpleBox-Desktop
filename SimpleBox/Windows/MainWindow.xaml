@@ -191,7 +191,7 @@
                             <fw:AcrylicContextMenu>
                                 <MenuItem Header="导入…" IsEnabled="False" />
                                 <Separator Background="#30FFFFFF" />
-                                <MenuItem Header="从SimpleBox Manager导入" Click="ImportFromSimpleBoxManagerClick">
+                                <MenuItem Header="从SimpleBox导入" Click="ImportFromSimpleBoxManagerClick">
                                     <MenuItem.Icon>
                                         <controls:FluentMenuIcon Symbol="Import" />
                                     </MenuItem.Icon>
@@ -199,6 +199,14 @@
                                 <MenuItem Header="从Marsher导入" Click="ImportFromMarsherClick">
                                     <MenuItem.Icon>
                                         <controls:FluentMenuIcon Symbol="Import" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator/>
+                                <MenuItem Header="导出…" IsEnabled="False" />
+                                <Separator Background="#30FFFFFF" />
+                                <MenuItem Header="导出分组到文件…" Click="ExportGroupClick">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Export" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </fw:AcrylicContextMenu>

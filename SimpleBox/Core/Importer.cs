@@ -21,7 +21,7 @@ namespace SimpleBox.Core
         public Mallow[] Parse(string rawData);
     }
 
-    public static class ImportHelper
+    public static class ImportExportHelper
     {
         public static void Import(IImporter importer)
         {
@@ -73,6 +73,34 @@ namespace SimpleBox.Core
 
             for (int i = 0; i < mallows.Length; i++)
                 MallowSource.CurrentSource.Current.Mallows.Insert(i, mallows[i]);
+        }
+
+        public static void Export(List<Mallow> mallows)
+        {
+            CommonSaveFileDialog dialog = new CommonSaveFileDialog
+            {
+                Title = "导出",
+                DefaultDirectory = Environment.CurrentDirectory,
+                IsExpandedMode = true,
+                DefaultExtension = ".json",
+                Filters =
+                {
+                    new CommonFileDialogFilter("SimpleBox导出文件", ".json")
+                },
+                EnsureFileExists = true,
+                EnsurePathExists = true,
+                EnsureValidNames = true,
+                DefaultFileName = "SimpleBox导出.json"
+            };
+
+            if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
+
+            string fileName = dialog.FileName;
+
+            string rawData = JsonConvert.SerializeObject(mallows);
+
+            File.WriteAllText(fileName, rawData);
+
         }
     }
 
