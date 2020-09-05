@@ -25,7 +25,7 @@
                   Name="RootElement">
 
     <fw:AcrylicWindow.Resources>
-        <utils:SingleLineTextConverter x:Key="SingleLineTextConverter"/>
+        <utils:SingleLineTextConverter x:Key="SingleLineTextConverter" />
     </fw:AcrylicWindow.Resources>
 
     <Grid DataContext="{x:Static models:MallowSource.CurrentSource}">
@@ -99,13 +99,21 @@
                             <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                                 <Grid.ContextMenu>
                                     <fw:AcrylicContextMenu>
-                                        <MenuItem Header="重命名" Click="GroupRenameClick" />
-                                        <MenuItem Header="删除" Click="GroupDeleteClick" />
+                                        <MenuItem Header="重命名" Click="GroupRenameClick">
+                                            <MenuItem.Icon>
+                                                <controls:FluentMenuIcon Symbol="Rename" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="删除" Click="GroupDeleteClick">
+                                            <MenuItem.Icon>
+                                                <controls:FluentMenuIcon Symbol="Delete" />
+                                            </MenuItem.Icon>
+                                        </MenuItem>
                                     </fw:AcrylicContextMenu>
                                 </Grid.ContextMenu>
                                 <StackPanel Margin="6">
                                     <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"
-                                               TextTrimming="CharacterEllipsis"/>
+                                               TextTrimming="CharacterEllipsis" />
                                     <TextBlock Margin="0,4"
                                                Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}" />
                                 </StackPanel>
@@ -154,8 +162,16 @@
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
-                                <MenuItem Header="新建提问" Click="CreateMallowClick" />
-                                <MenuItem Header="新建分组" Click="CreateMallowGroupClick" />
+                                <MenuItem Header="新建提问" Click="CreateMallowClick">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Add" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="新建分组" Click="CreateMallowGroupClick">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Add" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <Grid>
@@ -169,14 +185,20 @@
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
-                            ToolTip="导入"
+                            ToolTip="更多"
                             Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                         <Button.ContextMenu>
                             <fw:AcrylicContextMenu>
-                                <MenuItem Header="从SimpleBox Manager导入" Click="ImportFromSimpleBoxManagerClick" />
+                                <MenuItem Header="导入…" IsEnabled="False" />
+                                <Separator Background="#30FFFFFF" />
+                                <MenuItem Header="从SimpleBox Manager导入" Click="ImportFromSimpleBoxManagerClick">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Import" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
-                        <controls:FluentIcon Symbol="Import" />
+                        <controls:FluentIcon Symbol="More" />
                     </Button>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -198,40 +220,48 @@
                                  SelectedItem="{Binding Current.CurrentMallow}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <Grid
+                                        MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                                         <Grid.ContextMenu>
                                             <fw:AcrylicContextMenu>
-                                                <MenuItem Header="删除" Click="MallowDeleteClick" />
+                                                <MenuItem Header="删除" Click="MallowDeleteClick">
+                                                    <MenuItem.Icon>
+                                                        <controls:FluentMenuIcon Symbol="Delete" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
                                             </fw:AcrylicContextMenu>
                                         </Grid.ContextMenu>
                                         <StackPanel Margin="6">
                                             <Grid Margin="0,4">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition Width="8"/>
-                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="8" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Text="{Binding LocalMessage, Converter={StaticResource SingleLineTextConverter}}"
-                                                           FontSize="16" FontWeight="Bold"
-                                                           Grid.Column="0"
-                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock
+                                                    Text="{Binding LocalMessage, Converter={StaticResource SingleLineTextConverter}}"
+                                                    FontSize="16" FontWeight="Bold"
+                                                    Grid.Column="0"
+                                                    TextTrimming="CharacterEllipsis" />
                                                 <TextBlock Text="{Binding LocalCreateTime, StringFormat='MM/dd HH:mm'}"
-                                                           Grid.Column="2"/>
+                                                           Grid.Column="2" />
                                             </Grid>
                                             <Grid Height="1" Background="White"
-                                                  Opacity="0.3"/>
+                                                  Opacity="0.3" />
                                             <Grid Margin="0,4">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition/>
-                                                    <ColumnDefinition Width="8"/>
-                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="8" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock Text="{Binding LocalResponse, Converter={StaticResource SingleLineTextConverter}}"
-                                                           FontSize="14"
-                                                           Grid.Column="0"
-                                                           TextTrimming="CharacterEllipsis"/>
-                                                <TextBlock Text="{Binding LocalResponseTime, StringFormat='MM/dd HH:mm'}"
-                                                           Grid.Column="2"/>
+                                                <TextBlock
+                                                    Text="{Binding LocalResponse, Converter={StaticResource SingleLineTextConverter}}"
+                                                    FontSize="14"
+                                                    Grid.Column="0"
+                                                    TextTrimming="CharacterEllipsis" />
+                                                <TextBlock
+                                                    Text="{Binding LocalResponseTime, StringFormat='MM/dd HH:mm'}"
+                                                    Grid.Column="2" />
                                             </Grid>
                                         </StackPanel>
                                     </Grid>
@@ -310,11 +340,11 @@
                         </Grid.RowDefinitions>
                         <TextBox Grid.Row="0" Style="{DynamicResource MainEditTextBoxStyle}"
                                  Text="{Binding Current.CurrentMallow.LocalMessage, UpdateSourceTrigger=PropertyChanged}"
-                                 TextWrapping="Wrap" AcceptsReturn="True"/>
+                                 TextWrapping="Wrap" AcceptsReturn="True" />
                         <GridSplitter Grid.Row="1" Background="#10FFFFFF" />
                         <TextBox Grid.Row="2" Style="{DynamicResource MainEditTextBoxStyle}"
                                  Text="{Binding Current.CurrentMallow.LocalResponse, UpdateSourceTrigger=PropertyChanged}"
-                                 TextWrapping="Wrap" AcceptsReturn="True"/>
+                                 TextWrapping="Wrap" AcceptsReturn="True" />
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
