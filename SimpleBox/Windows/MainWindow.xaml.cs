@@ -124,7 +124,7 @@ namespace SimpleBox.Windows
         private async void PushMallowCompleted() => await Dispatcher.InvokeAsync(() => WebPushTextBlock.Text = "已显示");
 
         private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e) =>
-            ImportHelper.Import(new ManagerImporter());
+            ImportHelper.Import(new SimpleBoxImporter());
 
         private void ImportFromMarsherClick(object sender, RoutedEventArgs e) =>
             ImportHelper.Import(new MarsherImporter());

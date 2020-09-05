@@ -76,15 +76,12 @@ namespace SimpleBox.Core
         }
     }
 
-    public sealed class ManagerImporter : IImporter
+    public sealed class SimpleBoxImporter : IImporter
     {
-        public string Name => "Manager";
-        public string DialogDisplayName => "Manager导出文件";
+        public string Name => "SimpleBox";
+        public string DialogDisplayName => "SimpleBox导出文件";
         public string ExtensionName => ".json";
-        public Mallow[] Parse(string rawData)
-        {
-            return JsonConvert.DeserializeObject<Mallow[]>(rawData);
-        }
+        public Mallow[] Parse(string rawData) => JsonConvert.DeserializeObject<Mallow[]>(rawData);
     }
 
     public sealed class MarsherImporter : IImporter
