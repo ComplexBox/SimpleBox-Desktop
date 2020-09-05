@@ -126,6 +126,9 @@ namespace SimpleBox.Windows
         private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e) =>
             ImportHelper.Import(new ManagerImporter());
 
+        private void ImportFromMarsherClick(object sender, RoutedEventArgs e) =>
+            ImportHelper.Import(new MarsherImporter());
+
         #endregion
 
         #region Utilities

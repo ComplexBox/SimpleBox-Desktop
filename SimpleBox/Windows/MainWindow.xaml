@@ -196,6 +196,11 @@
                                         <controls:FluentMenuIcon Symbol="Import" />
                                     </MenuItem.Icon>
                                 </MenuItem>
+                                <MenuItem Header="从Marsher导入" Click="ImportFromMarsherClick">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Import" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </fw:AcrylicContextMenu>
                         </Button.ContextMenu>
                         <controls:FluentIcon Symbol="More" />

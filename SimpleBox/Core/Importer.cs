@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SimpleBox.Models;
 
 namespace SimpleBox.Core
@@ -82,6 +84,31 @@ namespace SimpleBox.Core
         public Mallow[] Parse(string rawData)
         {
             return JsonConvert.DeserializeObject<Mallow[]>(rawData);
+        }
+    }
+
+    public sealed class MarsherImporter : IImporter
+    {
+        public string Name => "Marsher";
+        public string DialogDisplayName => "Marsher导出文件";
+        public string ExtensionName => ".marsher";
+        public Mallow[] Parse(string rawData)
+        {
+            JArray data = (JArray) JObject.Parse(rawData)["items"];
+            if (data is null) return Array.Empty<Mallow>();
+
+            List<Mallow> mallows = new List<Mallow>();
+            foreach (JToken rawItem in data)
+            {
+                Mallow mallow = new Mallow
+                {
+                    OriginalMessage = (string) rawItem["content"]
+                };
+                mallow.SetValuesOnDeserialized(new StreamingContext());
+                mallows.Add(mallow);
+            }
+
+            return mallows.ToArray();
         }
     }
 }
