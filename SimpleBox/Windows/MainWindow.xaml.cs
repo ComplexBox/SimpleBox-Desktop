@@ -50,7 +50,7 @@ namespace SimpleBox.Windows
 
         #endregion
 
-        #region Event Triggers
+        #region Lifecycle Events
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -58,7 +58,18 @@ namespace SimpleBox.Windows
             HwndSource.FromHwnd(hwnd).AddHook(WndProc);
         }
 
+        #endregion
+
+        #region Triggers - Open Extra Window
+
         private void OpenSettingsButtonClick(object sender, RoutedEventArgs e) => SettingsWindow.ShowSettings();
+
+        private void OpenSyncSettingsPopupClick(object sender, RoutedEventArgs e) =>
+            ShowPopup(SyncSettingsPopup, SyncSettingsButton);
+
+        #endregion
+
+        #region Triggers - Mallow Modifitions
 
         private void CreateMallowClick(object sender, RoutedEventArgs e)
         {
@@ -79,9 +90,6 @@ namespace SimpleBox.Windows
             MallowSource.CurrentSource.Data.Insert(0, group);
             MallowSource.CurrentSource.Current = group;
         }
-
-        private void OpenSyncSettingsPopupClick(object sender, RoutedEventArgs e) =>
-            ShowPopup(SyncSettingsPopup, SyncSettingsButton);
 
         private void GroupRenameClick(object sender, RoutedEventArgs e)
         {
@@ -106,6 +114,10 @@ namespace SimpleBox.Windows
             MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
         }
 
+        #endregion
+
+        #region Triggers - WebPush
+
         private void WebPushClick(object sender, RoutedEventArgs e)
         {
             WebPushTextBlock.Text = "正在推送……";
@@ -123,6 +135,10 @@ namespace SimpleBox.Windows
 
         private async void PushMallowCompleted() => await Dispatcher.InvokeAsync(() => WebPushTextBlock.Text = "已显示");
 
+        #endregion
+
+        #region Triggers - Import & Export
+
         private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e) =>
             ImportExportHelper.Import(new SimpleBoxImporter());
 
@@ -134,6 +150,22 @@ namespace SimpleBox.Windows
             if (MallowSource.CurrentSource.Current != null && MallowSource.CurrentSource.Current.Mallows.Any())
                 ImportExportHelper.Export(MallowSource.CurrentSource.Current.Mallows.ToList());
         }
+
+        #endregion
+
+        #region Triggers - MultiSelect
+
+        private void ToggleMultiSelectClick(object sender, RoutedEventArgs e) => IsSelecting = !IsSelecting;
+
+        private void SelectAllClick(object sender, RoutedEventArgs e)
+        {
+            MallowList?.SelectedItems.Clear();
+            if (MallowSource.CurrentSource.Current is null) return;
+            foreach (Mallow mallow in MallowSource.CurrentSource.Current.Mallows)
+                MallowList?.SelectedItems.Add(mallow);
+        }
+
+        private void SelectAllOffClick(object sender, RoutedEventArgs e) => MallowList?.SelectedItems.Clear();
 
         #endregion
 
