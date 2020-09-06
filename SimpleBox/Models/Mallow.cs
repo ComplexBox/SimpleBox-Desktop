@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SimpleBox.Utils;
+using SimpleBox.Utils.State;
 
 namespace SimpleBox.Models
 {
