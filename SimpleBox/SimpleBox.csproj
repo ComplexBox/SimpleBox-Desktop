@@ -69,6 +69,7 @@
     <Compile Include="Core\Importer.cs" />
     <Compile Include="Core\WebPush.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\NetworkHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="Models\Config.cs" />
