@@ -21,19 +21,7 @@ namespace SimpleBox.Windows
             set
             {
                 _isSelecting = value;
-                SelectedMallows?.Clear();
-                OnPropertyChanged();
-            }
-        }
-
-        private IList<Mallow> _selectedMallows;
-
-        public IList<Mallow> SelectedMallows
-        {
-            get => _selectedMallows;
-            set
-            {
-                _selectedMallows = value;
+                MallowList?.SelectedItems.Clear();
                 OnPropertyChanged();
             }
         }
