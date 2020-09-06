@@ -21,8 +21,8 @@ namespace SimpleBox.Windows
             set
             {
                 _isSelecting = value;
-                MallowList?.SelectedItems.Clear();
                 OnPropertyChanged();
+                if (value) MallowList?.SelectedItems.Clear();
             }
         }
 
