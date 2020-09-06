@@ -6,37 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using SimpleBox.Helpers;
 
 namespace SimpleBox.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public sealed class Config : INotifyPropertyChanged
+    public class UserPass : INotifyPropertyChanged
     {
-        #region Current
-
-        public static Config Current { get; } = ConfigHelper.OpenConfig();
-
-        #endregion
-
-        #region Update
-
-        [JsonProperty]
-        private string updateServer = "https://update.simplebox.vbox.moe/stable";
-
-        public string UpdateServer
-        {
-            get => updateServer;
-            set
-            {
-                updateServer = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #endregion
-
-        #region User Data
+        #region Data Context
 
         [JsonProperty]
         private string username = "";
@@ -64,16 +40,13 @@ namespace SimpleBox.Models
             }
         }
 
-        [JsonProperty("userPasses")]
-        public Dictionary<string, UserPass> UserPasses { get; set; }
-
         #endregion
 
         #region Property Changed
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
