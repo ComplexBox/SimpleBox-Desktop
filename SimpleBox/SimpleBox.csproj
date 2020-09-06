@@ -80,6 +80,7 @@
     <Compile Include="Utils\LimitPropsContractResolver.cs" />
     <Compile Include="Utils\OpenContextMenuCommand.cs" />
     <Compile Include="Utils\SingleLineTextConverter.cs" />
+    <Compile Include="Utils\State\Progress.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
