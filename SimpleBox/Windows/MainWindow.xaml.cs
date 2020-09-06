@@ -104,14 +104,14 @@ namespace SimpleBox.Windows
         {
             if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is MallowGroup group)) return;
 
-            MallowSource.CurrentSource.Data.Remove(group);
+            if (ConfirmDelete()) MallowSource.CurrentSource.Data.Remove(group);
         }
 
         private void MallowDeleteClick(object sender, RoutedEventArgs e)
         {
             if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is Mallow mallow)) return;
 
-            MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
+            if (ConfirmDelete()) MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
         }
 
         #endregion
@@ -176,6 +176,16 @@ namespace SimpleBox.Windows
             popup.IsOpen = false;
             popup.PlacementTarget = placementTarget;
             popup.IsOpen = true;
+        }
+
+        private static bool ConfirmDelete()
+        {
+            return MessageBox.Show(
+                "确定要删除吗?",
+                "删除",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning,
+                MessageBoxResult.Yes) == MessageBoxResult.Yes;
         }
 
         #endregion
