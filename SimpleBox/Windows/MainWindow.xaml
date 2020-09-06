@@ -32,7 +32,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="250" />
             <ColumnDefinition Width="5" />
-            <ColumnDefinition MinWidth="200" />
+            <ColumnDefinition MinWidth="290" />
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="2*" MinWidth="200" />
         </Grid.ColumnDefinitions>
