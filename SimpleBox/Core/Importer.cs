@@ -64,9 +64,14 @@ namespace SimpleBox.Core
                 return;
             }
 
+            Import(importer.Name, mallows);
+        }
+
+        public static void Import(string importerName, Mallow[] mallows)
+        {
             MallowGroup group = new MallowGroup
             {
-                Name = $"{importer.Name}导入"
+                Name = $"{importerName}导入"
             };
             MallowSource.CurrentSource.Data.Insert(0, group);
             MallowSource.CurrentSource.Current = group;
