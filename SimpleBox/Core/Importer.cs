@@ -13,27 +13,30 @@ using SimpleBox.Models;
 
 namespace SimpleBox.Core
 {
-    public interface IImporter
+    public interface IMallowProvider
     {
         public string Name { get; }
-        public string DialogDisplayName { get; }
+    }
+
+    public interface IMallowImporter : IMallowProvider
+    {
         public string ExtensionName { get; }
         public Mallow[] Parse(string rawData);
     }
 
     public static class ImportExportHelper
     {
-        public static void Import(IImporter importer)
+        public static void Import(IMallowImporter importer)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog
             {
-                Title = $"选择{importer.DialogDisplayName}",
+                Title = $"选择{importer.Name}导出文件",
                 DefaultDirectory = Environment.CurrentDirectory,
                 IsFolderPicker = false,
                 DefaultExtension = importer.ExtensionName,
                 Filters =
                 {
-                    new CommonFileDialogFilter(importer.DialogDisplayName, importer.ExtensionName)
+                    new CommonFileDialogFilter($"{importer.Name}文件", importer.ExtensionName)
                 },
                 EnsureFileExists = true,
                 EnsurePathExists = true,
@@ -64,14 +67,14 @@ namespace SimpleBox.Core
                 return;
             }
 
-            Import(importer.Name, mallows);
+            Import(importer, mallows);
         }
 
-        public static void Import(string importerName, Mallow[] mallows)
+        public static void Import(IMallowProvider mallowProvider, Mallow[] mallows)
         {
             MallowGroup group = new MallowGroup
             {
-                Name = $"{importerName}导入"
+                Name = $"{mallowProvider.Name}导入"
             };
             MallowSource.CurrentSource.Data.Insert(0, group);
             MallowSource.CurrentSource.Current = group;
@@ -109,18 +112,16 @@ namespace SimpleBox.Core
         }
     }
 
-    public sealed class SimpleBoxImporter : IImporter
+    public sealed class SimpleBoxImporter : IMallowImporter
     {
         public string Name => "SimpleBox";
-        public string DialogDisplayName => "SimpleBox导出文件";
         public string ExtensionName => ".json";
         public Mallow[] Parse(string rawData) => JsonConvert.DeserializeObject<Mallow[]>(rawData);
     }
 
-    public sealed class MarsherImporter : IImporter
+    public sealed class MarsherImporter : IMallowImporter
     {
         public string Name => "Marsher";
-        public string DialogDisplayName => "Marsher导出文件";
         public string ExtensionName => ".marsher";
         public Mallow[] Parse(string rawData)
         {
