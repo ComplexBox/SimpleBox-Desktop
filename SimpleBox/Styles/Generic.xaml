@@ -3,6 +3,8 @@
                     xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                     xmlns:controls="clr-namespace:SimpleBox.Controls">
 
+    <!--#region Control Default Styles -->
+
     <Style TargetType="ListBox" BasedOn="{StaticResource ListBoxRevealStyle}">
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="Foreground" Value="White" />
@@ -10,28 +12,21 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
 
-    <Style x:Key="ButtonRevealTransparentStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
-        <Setter Property="Background" Value="{x:Null}" />
-    </Style>
-
-    <Style x:Key="ButtonAccentRevealTransparentStyle" TargetType="Button"
-           BasedOn="{StaticResource ButtonAccentRevealStyle}">
-        <Setter Property="Background" Value="{x:Null}" />
-    </Style>
-
-    <Style x:Key="AppBarTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="AppBarWideTextStyle" TargetType="TextBlock" BasedOn="{StaticResource AppBarTextStyle}">
-        <Setter Property="Margin" Value="4,0" />
-    </Style>
-
     <Style TargetType="fw:AcrylicPopup" BasedOn="{StaticResource {x:Type fw:AcrylicPopup}}">
         <Setter Property="StaysOpen" Value="False"/>
         <Setter Property="AllowsTransparency" Value="True"/>
     </Style>
+
+    <Style TargetType="GridSplitter">
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="#60000000" />
+        <Setter Property="ShowsPreview" Value="False" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region Common Control Extra Styles -->
 
     <Style x:Key="MainEditTextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{x:Null}" />
@@ -44,12 +39,22 @@
         <Setter Property="SelectionOpacity" Value="0.2" />
     </Style>
 
-    <Style TargetType="GridSplitter">
-        <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Background" Value="#60000000" />
-        <Setter Property="ShowsPreview" Value="False" />
+    <!--#endregion-->
+
+    <!--#region Button Extra Styles -->
+
+    <Style x:Key="ButtonRevealTransparentStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+        <Setter Property="Background" Value="{x:Null}" />
     </Style>
+
+    <Style x:Key="ButtonAccentRevealTransparentStyle" TargetType="Button"
+           BasedOn="{StaticResource ButtonAccentRevealStyle}">
+        <Setter Property="Background" Value="{x:Null}" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region Settings Tab Control Style -->
 
     <Style x:Key="SettingsTabControlStyle" TargetType="TabControl">
         <Setter Property="Padding" Value="2" />
@@ -101,6 +106,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--#endregion-->
+
+    <!--#region Update Control Style -->
 
     <Style x:Key="UpdateButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonAccentRevealTransparentStyle}">
         <!--Static Properties-->
@@ -191,6 +200,42 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <!--#endregion-->
+
+    <!--#region MainWindow AppBar -->
+
+    <Style x:Key="AppBarTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="AppBarWideTextStyle" TargetType="TextBlock" BasedOn="{StaticResource AppBarTextStyle}">
+        <Setter Property="Margin" Value="4,0" />
+    </Style>
+
+    <!--#endregion-->
+
+    <!--#region MainWindow MallowList -->
+    
+    <Style x:Key="MallowBarSelectingButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealTransparentStyle}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsSelecting, ElementName=RootElement}" Value="True">
+                <Setter Property="Background" Value="{x:Static fw:AccentColors.ImmersiveSystemAccentBrush}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="MallowListStyle" TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsSelecting, ElementName=RootElement}" Value="True">
+                <Setter Property="SelectionMode" Value="Multiple"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--#endregion-->
 
 </ResourceDictionary>
     
