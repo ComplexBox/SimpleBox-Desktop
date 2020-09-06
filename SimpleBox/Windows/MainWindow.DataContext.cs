@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using SimpleBox.Models;
 
 namespace SimpleBox.Windows
 {
@@ -20,6 +21,19 @@ namespace SimpleBox.Windows
             set
             {
                 _isSelecting = value;
+                SelectedMallows?.Clear();
+                OnPropertyChanged();
+            }
+        }
+
+        private IList<Mallow> _selectedMallows;
+
+        public IList<Mallow> SelectedMallows
+        {
+            get => _selectedMallows;
+            set
+            {
+                _selectedMallows = value;
                 OnPropertyChanged();
             }
         }
