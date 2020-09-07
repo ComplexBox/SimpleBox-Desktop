@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBox", "SimpleBox\Simp
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29992976-A176-4FD3-A463-D6402E9C6829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29992976-A176-4FD3-A463-D6402E9C6829}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29992976-A176-4FD3-A463-D6402E9C6829}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29992976-A176-4FD3-A463-D6402E9C6829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29992976-A176-4FD3-A463-D6402E9C6829}.Debug|x64.ActiveCfg = Debug|x64
+		{29992976-A176-4FD3-A463-D6402E9C6829}.Debug|x64.Build.0 = Debug|x64
+		{29992976-A176-4FD3-A463-D6402E9C6829}.Release|x64.ActiveCfg = Debug|x64
+		{29992976-A176-4FD3-A463-D6402E9C6829}.Release|x64.Build.0 = Debug|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
