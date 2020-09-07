@@ -114,8 +114,16 @@
                                 <StackPanel Margin="6">
                                     <TextBlock Margin="0,4" FontSize="20" Text="{Binding Name}"
                                                TextTrimming="CharacterEllipsis" />
-                                    <TextBlock Margin="0,4"
-                                               Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}" />
+                                    <!--<TextBlock Margin="0,4"
+                                               Text="{Binding ModifiedTime, StringFormat='最后修改：MM/dd HH:mm'}" />-->
+                                    <TextBlock Margin="0,4">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0}项目，{1:最后修改：MM/dd HH:mm}">
+                                                <Binding Path="Mallows.Count"/>
+                                                <Binding Path="ModifiedTime"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
