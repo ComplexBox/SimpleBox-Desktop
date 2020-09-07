@@ -9,6 +9,7 @@ using System.Windows;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
+using SimpleBox.Utils;
 using SimpleBox.Windows;
 using SourceChord.FluentWPF;
 using Squirrel;
@@ -88,6 +89,10 @@ namespace SimpleBox
                     MessageBoxResult.OK);
                 Current.Shutdown(1);
             }
+
+            // Initialize CEFSharp
+
+            CefHelper.Initialize();
 
             // Force Dark Theme
 

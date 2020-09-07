@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,6 +21,7 @@ using Newtonsoft.Json;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
+using SimpleBox.Utils;
 using SourceChord.FluentWPF;
 
 namespace SimpleBox.Windows
@@ -35,13 +37,7 @@ namespace SimpleBox.Windows
         {
             InitializeComponent();
 
-            Closing += (sender, args) =>
-            {
-                StorageHelper.SaveData(MallowSource.CurrentSource);
-                ConfigHelper.SaveConfig(Config.Current);
-                WebPush.Current.Stop();
-                UpdateHelper.Current.Dispose();
-            };
+            Closing += OnClosing;
 
             Closed += (sender, args) => Application.Current.Shutdown(0);
 
@@ -56,6 +52,15 @@ namespace SimpleBox.Windows
         {
             IntPtr hwnd = new WindowInteropHelper(this).Handle;
             HwndSource.FromHwnd(hwnd).AddHook(WndProc);
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            StorageHelper.SaveData(MallowSource.CurrentSource);
+            ConfigHelper.SaveConfig(Config.Current);
+            WebPush.Current.Stop();
+            CefHelper.Shutdown();
+            UpdateHelper.Current.Dispose();
         }
 
         #endregion
