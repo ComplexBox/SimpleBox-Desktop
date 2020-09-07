@@ -383,7 +383,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <Button ToolTip="删除" Click="MallowMultiDeleteClick">
+                        <Button Style="{DynamicResource ButtonRevealTransparentStyle}"
+                                ToolTip="删除" Click="MallowMultiDeleteClick">
                             <controls:FluentIcon Symbol="Delete"/>
                         </Button>
                     </StackPanel>
