@@ -119,6 +119,17 @@ namespace SimpleBox.Windows
             if (ConfirmDelete()) MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
         }
 
+        private void MallowMultiDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (MallowList.SelectedItems.Count == 0 || MallowSource.CurrentSource.Current is null || !ConfirmDelete()) return;
+
+            foreach (Mallow mallow in MallowList.SelectedItems)
+            {
+                if (mallow is null || !MallowSource.CurrentSource.Current.Mallows.Contains(mallow)) continue;
+                MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
+            }
+        }
+
         #endregion
 
         #region Triggers - WebPush
