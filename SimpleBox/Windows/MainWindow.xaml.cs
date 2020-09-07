@@ -123,7 +123,10 @@ namespace SimpleBox.Windows
         {
             if (MallowList.SelectedItems.Count == 0 || MallowSource.CurrentSource.Current is null || !ConfirmDelete()) return;
 
-            foreach (Mallow mallow in MallowList.SelectedItems)
+            Mallow[] mallows = new Mallow[MallowList.SelectedItems.Count];
+            MallowList.SelectedItems.CopyTo(mallows, 0);
+
+            foreach (Mallow mallow in mallows)
             {
                 if (mallow is null || !MallowSource.CurrentSource.Current.Mallows.Contains(mallow)) continue;
                 MallowSource.CurrentSource.Current.Mallows.Remove(mallow);
