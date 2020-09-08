@@ -301,6 +301,23 @@
                                         MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
                                         <Grid.ContextMenu>
                                             <fw:AcrylicContextMenu>
+                                                <MenuItem Header="移动到…"
+                                                          DataContext="{x:Static models:MallowSource.CurrentSource}"
+                                                          ItemsSource="{Binding Data}">
+                                                    <MenuItem.ItemContainerStyle>
+                                                        <Style TargetType="MenuItem">
+                                                            <Setter Property="Header" Value="{Binding Name}"/>
+                                                            <Setter Property="Icon">
+                                                                <Setter.Value>
+                                                                    <controls:FluentMenuIcon Symbol="MailInbox"/>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </MenuItem.ItemContainerStyle>
+                                                    <MenuItem.Icon>
+                                                        <controls:FluentMenuIcon Symbol="Move" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
                                                 <MenuItem Header="删除" Click="MallowDeleteClick">
                                                     <MenuItem.Icon>
                                                         <controls:FluentMenuIcon Symbol="Delete" />
@@ -390,6 +407,33 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                            HorizontalContentAlignment="Stretch"
+                            Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
+                        <Button.ContextMenu>
+                            <fw:AcrylicContextMenu ItemsSource="{Binding Data}">
+                                <fw:AcrylicContextMenu.ItemContainerStyle>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Header" Value="{Binding Name}"/>
+                                        <Setter Property="Icon">
+                                            <Setter.Value>
+                                                <controls:FluentMenuIcon Symbol="MailInbox"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </fw:AcrylicContextMenu.ItemContainerStyle>
+                            </fw:AcrylicContextMenu>
+                        </Button.ContextMenu>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <controls:FluentIcon Grid.Column="0" Symbol="Move" />
+                            <TextBlock Grid.Column="1" Text="移动到…"
+                                       Style="{DynamicResource AppBarWideTextStyle}" />
+                        </Grid>
+                    </Button>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                         <Button Style="{DynamicResource ButtonRevealTransparentStyle}"
                                 ToolTip="删除" Click="MallowMultiDeleteClick">
