@@ -307,6 +307,9 @@
                                                     <MenuItem.ItemContainerStyle>
                                                         <Style TargetType="MenuItem">
                                                             <Setter Property="Header" Value="{Binding Name}"/>
+                                                            <Setter Property="CommandParameter"
+                                                                    Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=fw:AcrylicContextMenu}}"/>
+                                                            <EventSetter Event="Click" Handler="MallowMoveClick"/>
                                                             <Setter Property="Icon">
                                                                 <Setter.Value>
                                                                     <controls:FluentMenuIcon Symbol="MailInbox"/>
@@ -415,6 +418,7 @@
                                 <fw:AcrylicContextMenu.ItemContainerStyle>
                                     <Style TargetType="MenuItem">
                                         <Setter Property="Header" Value="{Binding Name}"/>
+                                        <EventSetter Event="Click" Handler="MallowMultiMoveClick"/>
                                         <Setter Property="Icon">
                                             <Setter.Value>
                                                 <controls:FluentMenuIcon Symbol="MailInbox"/>

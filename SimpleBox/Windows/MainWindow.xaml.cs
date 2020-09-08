@@ -133,6 +133,45 @@ namespace SimpleBox.Windows
             }
         }
 
+        private void MallowMoveClick(object sender, RoutedEventArgs e)
+        {
+            Mallow source =
+                ((sender as MenuItem)?.CommandParameter as FrameworkElement)?.DataContext as Mallow;
+            MallowGroup sourceGroup = MallowSource.CurrentSource.Current;
+            MallowGroup targetGroup = (sender as MenuItem)?.DataContext as MallowGroup;
+            
+            if (source is null ||
+                sourceGroup is null ||
+                targetGroup is null ||
+                sourceGroup == targetGroup ||
+                !sourceGroup.Mallows.Contains(source)) return;
+
+            targetGroup.Mallows.Insert(0, source);
+            sourceGroup.Mallows.Remove(source);
+        }
+
+        private void MallowMultiMoveClick(object sender, RoutedEventArgs e)
+        {
+            MallowGroup sourceGroup = MallowSource.CurrentSource.Current;
+            MallowGroup targetGroup = (sender as MenuItem)?.DataContext as MallowGroup;
+
+            if (MallowList.SelectedItems.Count == 0 ||
+                sourceGroup is null ||
+                targetGroup is null ||
+                sourceGroup == targetGroup) return;
+
+            Mallow[] mallows = new Mallow[MallowList.SelectedItems.Count];
+            MallowList.SelectedItems.CopyTo(mallows, 0);
+
+            for (int i = 0; i < mallows.Length; i++)
+            {
+                Mallow mallow = mallows[i];
+                if (!sourceGroup.Mallows.Contains(mallow)) continue;
+                targetGroup.Mallows.Insert(i, mallow);
+                sourceGroup.Mallows.Remove(mallow);
+            }
+        }
+
         #endregion
 
         #region Triggers - WebPush
