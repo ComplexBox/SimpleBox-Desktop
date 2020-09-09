@@ -9,7 +9,7 @@ namespace SimpleBox.Core
 {
     public interface IMallowPuller : IMallowProvider
     {
-        public Mallow[] Pull(UserPass userPass, int mode);
+
     }
 
     public static class PullHelper

@@ -65,7 +65,7 @@ namespace SimpleBox.Models
         }
 
         [JsonProperty("userPasses")]
-        public Dictionary<string, UserPass> UserPasses { get; set; }
+        public Dictionary<string, string> UserTokens { get; set; } = new Dictionary<string, string>();
 
         #endregion
 
