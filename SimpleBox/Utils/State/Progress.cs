@@ -13,7 +13,7 @@ namespace SimpleBox.Utils.State
     {
         #region Data Context
 
-        private string _text = "";
+        private string _text = "就绪";
 
         public string Text
         {
