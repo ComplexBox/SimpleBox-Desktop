@@ -39,6 +39,7 @@ namespace SimpleBox.Windows
             CreateGroupName = $"{puller.Name}导入";
 
             Handle = handle;
+            Puller = puller;
 
             // Initialize Component
 
@@ -49,7 +50,9 @@ namespace SimpleBox.Windows
 
         #region Core
 
-        private EventWaitHandle Handle;
+        public readonly EventWaitHandle Handle;
+
+        public readonly MallowPuller Puller;
 
         #endregion
 
