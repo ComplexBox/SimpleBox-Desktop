@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CefSharp;
+using SimpleBox.Utils;
 
 namespace SimpleBox.Windows
 {
@@ -22,6 +24,17 @@ namespace SimpleBox.Windows
         public LoginWindow()
         {
             InitializeComponent();
+
+            MallowResourceRequestHandler handler = new MallowResourceRequestHandler();
+            MallowRequestHandler requestHandler = new MallowRequestHandler(handler);
+            Browser.RequestHandler = requestHandler;
+            handler.OnResponse += BrowserHandlerOnOnResponse;
+        }
+
+        private void BrowserHandlerOnOnResponse(object sender, KeyValuePair<IResponse, byte[]> e)
+        {
+            IResponse response = e.Key;
+            byte[] data = e.Value;
         }
     }
 }

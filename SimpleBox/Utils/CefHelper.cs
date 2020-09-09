@@ -14,10 +14,6 @@ namespace SimpleBox.Utils
 {
     public static class CefHelper
     {
-        private static RequestHandler _requestHandler;
-
-        public static RequestHandler RequestHandler => _requestHandler ??= new MallowRequestHandler();
-
         private static string GetLocaleName()
         {
             string n = CultureInfo.CurrentUICulture.Name.Split('-')[0];
@@ -47,13 +43,44 @@ namespace SimpleBox.Utils
         public static void Shutdown() => Cef.Shutdown();
     }
 
+    public sealed class MallowResourceRequestHandler : ResourceRequestHandler
+    {
+        private readonly MemoryStream _memoryStream = new MemoryStream();
+
+        protected override IResponseFilter GetResourceResponseFilter(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, IResponse response)
+        {
+            return new CefSharp.ResponseFilter.StreamResponseFilter(_memoryStream);
+        }
+
+        protected override void OnResourceLoadComplete(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request,
+            IResponse response, UrlRequestStatus status, long receivedContentLength)
+        {
+            OnResponse?.Invoke(this, new KeyValuePair<IResponse, byte[]>(response, _memoryStream.ToArray()));
+        }
+
+        public event EventHandler<KeyValuePair<IResponse, byte[]>> OnResponse;
+    }
+
     public sealed class MallowRequestHandler : RequestHandler
     {
+        private readonly MallowResourceRequestHandler _handler;
+
+        public MallowRequestHandler(MallowResourceRequestHandler handler)
+        {
+            _handler = handler;
+        }
+
         protected override bool OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture,
             bool isRedirect)
         {
             request.SetHeaderByName("Accept-Language", CultureInfo.CurrentUICulture.Name, true);
             return base.OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
+        }
+
+        protected override IResourceRequestHandler GetResourceRequestHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame,
+            IRequest request, bool isNavigation, bool isDownload, string requestInitiator, ref bool disableDefaultHandling)
+        {
+            return _handler;
         }
     }
 }
