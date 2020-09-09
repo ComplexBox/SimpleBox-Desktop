@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace SimpleBox.Utils.State
 {
@@ -12,43 +13,76 @@ namespace SimpleBox.Utils.State
     {
         #region Data Context
 
-        private ProgressState _state = ProgressState.Waiting;
+        private string _text = "";
 
-        public ProgressState State
+        public string Text
         {
-            get => _state;
+            get => _text;
             set
             {
-                _state = value;
+                _text = value;
                 OnPropertyChanged();
-                StateChanged?.Invoke(this, value);
-                ProgressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        private double _percent;
+        private bool _isIndeterminate;
 
-        public double Percent
+        public bool IsIndeterminate
         {
-            get => _percent;
+            get => _isIndeterminate;
             set
             {
-                _percent = value;
+                _isIndeterminate = value;
                 OnPropertyChanged();
-                PercentChanged?.Invoke(this, value);
-                ProgressChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        private double _percentage;
+
+        public double Percentage
+        {
+            get => _percentage;
+            set
+            {
+                _percentage = value;
+                OnPropertyChanged();
             }
         }
 
         #endregion
 
-        #region Events
+        #region Constructors
 
-        public event EventHandler<ProgressState> StateChanged;
+        /// <summary>
+        /// Create a <see cref="Progress"/> class.
+        /// </summary>
+        public Progress()
+        {
 
-        public event EventHandler<double> PercentChanged;
+        }
 
-        public event EventHandler ProgressChanged;
+        /// <summary>
+        /// Create a <see cref="Progress"/> class for display use.
+        /// <para>
+        /// This will automatically add an event listener on the <paramref name="source"/> object
+        /// to trigger <paramref name="dispatcher"/> react on the changes.
+        /// </para>
+        /// </summary>
+        /// <param name="source">The source class.</param>
+        /// <param name="dispatcher">The dispatcher of the window.</param>
+        public Progress(Progress source, Dispatcher dispatcher)
+        {
+            if (source is null || dispatcher is null) return;
+            source.PropertyChanged += (sender, args) =>
+            {
+                dispatcher.Invoke(() =>
+                {
+                    Text = source.Text;
+                    IsIndeterminate = source.IsIndeterminate;
+                    Percentage = source.Percentage;
+                });
+            };
+        }
 
         #endregion
 
@@ -62,13 +96,5 @@ namespace SimpleBox.Utils.State
         }
 
         #endregion
-    }
-
-    public enum ProgressState
-    {
-        Waiting = 0,
-        Working = 1,
-        Success = 2,
-        Failed = 3
     }
 }
