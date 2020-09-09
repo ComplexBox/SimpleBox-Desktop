@@ -10,7 +10,6 @@
         xmlns:models="clr-namespace:SimpleBox.Models"
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="登录"
         Height="600" Width="1056"
         MinHeight="600" MinWidth="1056"
         AcrylicWindowStyle="NoIcon"
@@ -21,8 +20,36 @@
         SnapsToDevicePixels="True"
         NoiseOpacity="0"
         fw:PointerTracker.Enabled="True"
+        Style="{DynamicResource LoginWindowStyle}"
         Name="RootElement">
 
-    <wpf:ChromiumWebBrowser/>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}"
+                    Style="{DynamicResource ButtonRevealTransparentStyle}"/>
+            <Button Grid.Column="1" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}"
+                    Style="{DynamicResource ButtonRevealTransparentStyle}"/>
+
+            <TextBlock Grid.Column="2" VerticalAlignment="Center"
+                       Text="{Binding Address, ElementName=Browser}"
+                       Margin="12,0"/>
+
+        </Grid>
+
+        <wpf:ChromiumWebBrowser Grid.Row="1" Name="Browser"/>
+
+    </Grid>
 
 </fw:AcrylicWindow>

@@ -237,5 +237,18 @@
 
     <!--#endregion-->
 
+    <!--#region LoginWindow -->
+    
+    <Style x:Key="LoginWindowStyle" TargetType="fw:AcrylicWindow" BasedOn="{StaticResource {x:Type fw:AcrylicWindow}}">
+        <Setter Property="Title" Value="登录"/>
+        <Style.Triggers>
+            <Trigger SourceName="Browser" Property="IsLoading" Value="True">
+                <Setter Property="Title" Value="正在加载……"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--#endregion-->
+
 </ResourceDictionary>
     
