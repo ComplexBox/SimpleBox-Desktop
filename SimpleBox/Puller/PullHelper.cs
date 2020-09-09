@@ -9,14 +9,9 @@ using SimpleBox.Utils.State;
 
 namespace SimpleBox.Puller
 {
-    public interface IMallowPuller : IMallowProvider
-    {
-        public Progress Progress { get; }
-    }
-
     public static class PullHelper
     {
-        public static void Pull(IMallowPuller puller)
+        public static void Pull(MallowPuller puller)
         {
 
         }

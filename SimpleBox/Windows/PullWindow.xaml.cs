@@ -23,7 +23,7 @@ namespace SimpleBox.Windows
     {
         #region Constructors
 
-        public PullWindow(IMallowPuller puller)
+        public PullWindow(MallowPuller puller)
         {
             // Create Progress for Display
 

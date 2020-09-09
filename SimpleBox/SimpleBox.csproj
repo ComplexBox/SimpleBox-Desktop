@@ -66,7 +66,8 @@
     </Compile>
     <Compile Include="Controls\FluentIcon.cs" />
     <Compile Include="Core\Importer.cs" />
-    <Compile Include="Puller\Puller.cs" />
+    <Compile Include="Puller\MallowPuller.cs" />
+    <Compile Include="Puller\PullHelper.cs" />
     <Compile Include="Core\WebPush.cs" />
     <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Helpers\NetworkHelper.cs" />
