@@ -24,7 +24,26 @@ namespace SimpleBox.Utils
         {
             CookieCollection cookieCollection = response.Headers.GetCookies(true);
             Cookie[] cookies = new Cookie[cookieCollection.Count];
-            cookieCollection.CopyTo(cookies, 0);
+            for (int i = 0; i < cookieCollection.Count; i++)
+            {
+                WebSocketSharp.Net.Cookie cookie = cookieCollection[i];
+                cookies[i] = new Cookie
+                {
+                    Name = cookie.Name,
+                    Value = cookie.Value,
+                    Comment = cookie.Comment,
+                    CommentUri = cookie.CommentUri,
+                    Discard = cookie.Discard,
+                    Domain = cookie.Domain,
+                    Expired = cookie.Expired,
+                    Expires = cookie.Expires,
+                    HttpOnly = cookie.HttpOnly,
+                    Path = cookie.Path,
+                    Port = cookie.Port,
+                    Secure = cookie.Secure,
+                    Version = cookie.Version
+                };
+            }
             return cookies;
         }
 
