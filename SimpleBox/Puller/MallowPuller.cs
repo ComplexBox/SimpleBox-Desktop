@@ -22,13 +22,9 @@ namespace SimpleBox.Puller
 
         public abstract string Name { get; }
 
-        public abstract Uri Host { get; }
-
         public abstract string LoginAddress { get; }
 
         protected abstract string VerifyAddress { get; }
-
-        public abstract string[] CookieChecks { get; }
 
         public Progress Progress { get; } = new Progress();
 
@@ -72,7 +68,7 @@ namespace SimpleBox.Puller
             }
         }
 
-        protected void SaveCookie()
+        public void SaveCookie()
         {
             StringWriter stringWriter = new StringWriter();
             XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
@@ -107,7 +103,7 @@ namespace SimpleBox.Puller
 
         #region Verify Utils
 
-        private bool VerifyLogin()
+        public bool VerifyLogin()
         {
             HttpWebRequest request = CreateWebRequest(VerifyAddress);
             request.AllowAutoRedirect = false;

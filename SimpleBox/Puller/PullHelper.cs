@@ -39,6 +39,11 @@ namespace SimpleBox.Puller
 
             Mallow[] mallows = puller.VerifyAndPull(isCreateMode ? selectedMallowGroup.Mallows.ToArray() : Array.Empty<Mallow>());
 
+            puller.Progress.IsIndeterminate = true;
+            puller.Progress.Text = "保存用户信息……";
+
+            puller.SaveCookie();
+
             pullWindow.Close();
 
             if (mallows is null)

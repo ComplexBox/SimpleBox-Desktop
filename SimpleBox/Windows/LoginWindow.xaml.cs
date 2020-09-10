@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -53,22 +54,24 @@ namespace SimpleBox.Windows
             Handler.OnGetCookie += (sender, cookies) =>
             {
                 foreach (Cookie cookie in cookies) puller.CookieContainer.Add(cookie);
-
-                CookieCollection rawCollection = puller.CookieContainer.GetCookies(puller.Host);
-                Cookie[] cookieArr = new Cookie[rawCollection.Count];
-                rawCollection.CopyTo(cookieArr, 0);
-
-                if (puller.CookieChecks.Any(check => cookieArr.All(cookie => cookie.Name != check)))
-                    return;
-
-                IsLoginComplete = true;
-                Close();
             };
 
             MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             Browser.RequestHandler = requestHandler;
 
             Browser.Address = puller.LoginAddress;
+
+            Timer timer = new Timer(4000)
+            {
+                AutoReset = true,
+                Enabled = true
+            };
+            timer.Elapsed += (sender, args) =>
+            {
+                if (!puller.VerifyLogin()) return;
+                IsLoginComplete = true;
+                Close();
+            };
         }
 
         public MallowResourceRequestHandler Handler { get; }
