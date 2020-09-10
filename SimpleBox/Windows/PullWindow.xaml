@@ -46,7 +46,9 @@
                                  Tag="InsertModeRadioButton"
                                  Click="ModeChangeClick"
                                  MinWidth="200"
-                                 GroupName="PullMode"/>
+                                 GroupName="PullMode"
+                                 Foreground="White"
+                                 IsChecked="True"/>
 
                     <Grid Grid.Column="1">
                         <Grid.Style>
@@ -81,7 +83,8 @@
                                  Tag="CreateModeRadioButton"
                                  Click="ModeChangeClick"
                                  MinWidth="200"
-                                 GroupName="PullMode"/>
+                                 GroupName="PullMode"
+                                 Foreground="White"/>
 
                     <Grid Grid.Column="1">
                         <Grid.Style>
