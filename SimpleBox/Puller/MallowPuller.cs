@@ -106,7 +106,7 @@ namespace SimpleBox.Puller
         {
             HttpWebRequest request = CreateWebRequest(Address);
             request.AllowAutoRedirect = false;
-            return request.GetResponse() is HttpWebResponse response && response.StatusCode == HttpStatusCode.OK;
+            return request.GetResponse() is HttpWebResponse response && response != null && response.StatusCode == HttpStatusCode.OK;
         }
 
         public Mallow[] VerifyAndPull(Mallow[] existingMallows)
