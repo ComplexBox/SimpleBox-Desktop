@@ -28,6 +28,8 @@ namespace SimpleBox.Puller
 
         protected abstract string VerifyAddress { get; }
 
+        public abstract string[] CookieChecks { get; }
+
         public Progress Progress { get; } = new Progress();
 
         #endregion
@@ -42,30 +44,32 @@ namespace SimpleBox.Puller
 
         #endregion
 
+        #region Constructor
+
+        protected MallowPuller() => LoadCookie();
+
+        #endregion
+
         #region Cookie Utils
 
-        public CookieContainer CookieContainer = new CookieContainer();
+        public CookieContainer CookieContainer;
 
-        public string[] CookieChecks = new string[0];
-
-        protected bool TryLoadCookie()
+        private CookieContainer LoadCookie()
         {
             if (!Config.Current.UserTokens.TryGetValue(Name, out string raw) ||
-                string.IsNullOrEmpty(raw)) return false;
+                string.IsNullOrEmpty(raw)) return new CookieContainer();
 
             XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
-
+            
             try
             {
                 object data = serializer.Deserialize(new StringReader(raw));
-                CookieContainer = data as CookieContainer;
+                return data as CookieContainer;
             }
             catch (Exception)
             {
-                return false;
+                return new CookieContainer();
             }
-
-            return true;
         }
 
         protected void SaveCookie()
