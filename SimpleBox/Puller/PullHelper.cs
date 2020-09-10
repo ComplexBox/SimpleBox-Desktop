@@ -18,18 +18,13 @@ namespace SimpleBox.Puller
         public static void Pull(MallowPuller puller)
         {
             if (puller is null) return;
-            
-            EventWaitHandle handle = new AutoResetEvent(false);
-            PullWindow pullWindow = new PullWindow(puller, handle);
-            Task.Factory.StartNew(PullCore, pullWindow);
-
+            PullWindow pullWindow = new PullWindow(puller);
             pullWindow.Show();
         }
 
-        private static void PullCore(object obj)
+        public static void PullCore(object obj)
         {
             if (!(obj is PullWindow pullWindow)) return;
-            pullWindow.Handle.WaitOne();
 
             MallowPuller puller = pullWindow.Puller;
             bool isCreateMode = pullWindow.IsCreateMode;

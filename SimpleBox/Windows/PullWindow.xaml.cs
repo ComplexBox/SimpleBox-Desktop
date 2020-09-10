@@ -27,7 +27,7 @@ namespace SimpleBox.Windows
     {
         #region Constructors
 
-        public PullWindow(MallowPuller puller, EventWaitHandle handle)
+        public PullWindow(MallowPuller puller)
         {
             // Create Progress for Display
 
@@ -38,7 +38,6 @@ namespace SimpleBox.Windows
             PullerName = puller.Name;
             CreateGroupName = $"{puller.Name}导入";
 
-            Handle = handle;
             Puller = puller;
 
             // Initialize Component
@@ -49,8 +48,6 @@ namespace SimpleBox.Windows
         #endregion
 
         #region Core
-
-        public readonly EventWaitHandle Handle;
 
         public readonly MallowPuller Puller;
 
@@ -105,7 +102,7 @@ namespace SimpleBox.Windows
         private void StartClick(object sender, RoutedEventArgs e)
         {
             RootElement.IsEnabled = false;
-            Handle?.Set();
+            Task.Factory.StartNew(PullHelper.PullCore, this);
         }
 
         private void CancelClick(object sender, RoutedEventArgs e) => Close();
