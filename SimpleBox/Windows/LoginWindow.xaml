@@ -38,9 +38,13 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}"
-                    Style="{DynamicResource ButtonRevealTransparentStyle}"/>
-            <Button Grid.Column="1" Command="{Binding WebBrowser.BackCommand, ElementName=Browser}"
-                    Style="{DynamicResource ButtonRevealTransparentStyle}"/>
+                    Style="{DynamicResource ButtonRevealTransparentStyle}">
+                <controls:FluentIcon Symbol="Left"/>
+            </Button>
+            <Button Grid.Column="1" Command="{Binding WebBrowser.ForwardCommand, ElementName=Browser}"
+                    Style="{DynamicResource ButtonRevealTransparentStyle}">
+                <controls:FluentIcon Symbol="Right"/>
+            </Button>
 
             <TextBlock Grid.Column="2" VerticalAlignment="Center"
                        Text="{Binding Address, ElementName=Browser}"
