@@ -108,7 +108,8 @@
                     <StackPanel Margin="24" DataContext="{x:Static models:Config.Current}">
                         <TextBlock Text="拉取" Style="{DynamicResource SectionTextStyle}"/>
                         <Button Content="启动登录窗口" Style="{DynamicResource ButtonRevealStyle}"
-                                Tag="CreateLoginWindow" Click="DebugButtonBase_OnClick"/>
+                                Tag="CreateLoginWindow" Click="DebugButtonBase_OnClick"
+                                Padding="12" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
