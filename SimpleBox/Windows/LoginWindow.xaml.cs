@@ -67,10 +67,19 @@ namespace SimpleBox.Windows
                 AutoReset = true,
                 Enabled = true
             };
+            bool isTickRunning = false;
             timer.Elapsed += (sender, args) =>
             {
-                if (!puller.VerifyLogin()) return;
+                if (!isTickRunning) isTickRunning = true;
+                else return;
+                if (!puller.VerifyLogin())
+                {
+                    isTickRunning = false;
+                    return;
+                }
                 IsLoginComplete = true;
+                timer.Stop();
+                timer.Dispose();
                 Close();
             };
         }
