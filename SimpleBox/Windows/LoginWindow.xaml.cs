@@ -67,7 +67,15 @@ namespace SimpleBox.Windows
                 AutoReset = true,
                 Enabled = true
             };
+
+            Closing += (sender, args) =>
+            {
+                timer.Stop();
+                timer.Dispose();
+            };
+
             bool isTickRunning = false;
+
             timer.Elapsed += (sender, args) =>
             {
                 if (!isTickRunning) isTickRunning = true;
