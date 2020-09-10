@@ -110,6 +110,7 @@ namespace SimpleBox.Puller
         private bool VerifyLogin()
         {
             HttpWebRequest request = CreateWebRequest(VerifyAddress);
+            request.AllowAutoRedirect = false;
             return request.GetResponse() is HttpWebResponse response && response.StatusCode == HttpStatusCode.OK;
         }
 
