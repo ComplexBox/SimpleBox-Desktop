@@ -62,7 +62,7 @@ namespace SimpleBox.Windows
 
             Browser.Address = puller.Address;
 
-            Timer timer = new Timer(4000)
+            Timer timer = new Timer(7000)
             {
                 AutoReset = true,
                 Enabled = true
