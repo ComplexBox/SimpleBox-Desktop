@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using CefSharp;
 using CefSharp.Handler;
 using CefSharp.Wpf;
@@ -18,34 +19,9 @@ namespace SimpleBox.Utils.Cef
             return n == "zh" || n == "en" || n == "pt" ? CultureInfo.CurrentUICulture.Name : n;
         }
 
-        internal static Cookie[] ParseCookie(IResponse response)
-        {
-            //CookieCollection cookieCollection = response.Headers.GetCookies(true);
-            Cookie[] cookies = new Cookie[cookieCollection.Count];
-            for (int i = 0; i < cookieCollection.Count; i++)
-            {
-                WebSocketSharp.Net.Cookie cookie = cookieCollection[i];
-                //cookies[i] = new Cookie
-                //{
-                //    Name = cookie.Name,
-                //    Value = cookie.Value,
-                //    Comment = cookie.Comment,
-                //    CommentUri = cookie.CommentUri,
-                //    Discard = cookie.Discard,
-                //    Domain = cookie.Domain,
-                //    Expired = cookie.Expired,
-                //    Expires = cookie.Expires,
-                //    HttpOnly = cookie.HttpOnly,
-                //    Path = cookie.Path,
-                //    Port = cookie.Port,
-                //    Secure = cookie.Secure,
-                //    Version = cookie.Version
-                //};
-
-                cookies[i] = new Cookie(cookie.Name, cookie.Value);
-            }
-            return cookies;
-        }
+        internal static CookieCollection ParseCookie(IRequest request, IResponse response) =>
+            CookieHelper.Current.ParseSetCookie(response.Headers["Set-Cookie"],
+                CookieHelper.Current.GetDomainUrl(request.Url));
 
         [STAThread]
         public static void Initialize()
@@ -75,11 +51,11 @@ namespace SimpleBox.Utils.Cef
         protected override void OnResourceLoadComplete(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request,
             IResponse response, UrlRequestStatus status, long receivedContentLength)
         {
-            Cookie[] cookie = CefHelper.ParseCookie(response);
-            if (cookie.Any()) OnGetCookie?.Invoke(this, cookie);
+            CookieCollection cookies = CefHelper.ParseCookie(request, response);
+            if (cookies.Count > 0) OnGetCookie?.Invoke(this, cookies);
         }
 
-        public event EventHandler<Cookie[]> OnGetCookie;
+        public event EventHandler<CookieCollection> OnGetCookie;
     }
 
     public sealed class MallowRequestHandler : RequestHandler
