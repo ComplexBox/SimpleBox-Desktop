@@ -49,7 +49,7 @@ namespace SimpleBox.Puller
 
         public CookieContainer CookieContainer;
 
-        private CookieContainer LoadCookie()
+        protected CookieContainer LoadCookie()
         {
             if (!Config.Current.UserTokens.TryGetValue(Name, out string raw) ||
                 string.IsNullOrEmpty(raw)) return new CookieContainer();

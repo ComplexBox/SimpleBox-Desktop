@@ -25,6 +25,8 @@ namespace SimpleBox.Puller
             XPathExpression.Compile("//a[contains(@class, 'load-more')]");
         private readonly Regex _extractIdEx = new Regex("/messages/([a-zA-Z0-9\\-]+)");
 
+        public MarshmallowPuller() => LoadCookie();
+
         protected override Mallow[] Pull(Mallow[] existingMallows)
         {
             List<Mallow> mallows = new List<Mallow>();
