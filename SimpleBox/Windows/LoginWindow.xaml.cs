@@ -25,18 +25,13 @@ namespace SimpleBox.Windows
         {
             InitializeComponent();
 
-            MallowResourceRequestHandler handler = new MallowResourceRequestHandler();
-            MallowRequestHandler requestHandler = new MallowRequestHandler(handler);
+            Handler = new MallowResourceRequestHandler();
+            MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             Browser.RequestHandler = requestHandler;
-            handler.OnResponse += BrowserHandlerOnOnResponse;
 
             Browser.Address = address;
         }
 
-        private void BrowserHandlerOnOnResponse(object sender, KeyValuePair<IResponse, byte[]> e)
-        {
-            IResponse response = e.Key;
-            string data = Encoding.UTF8.GetString(e.Value);
-        }
+        public MallowResourceRequestHandler Handler { get; }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CefSharp;
 using CefSharp.Handler;
 using CefSharp.Wpf;
 using SimpleBox.Helpers;
+using WebSocketSharp;
+using WebSocketSharp.Net;
+using Cookie = System.Net.Cookie;
 
 namespace SimpleBox.Utils
 {
@@ -18,6 +18,14 @@ namespace SimpleBox.Utils
         {
             string n = CultureInfo.CurrentUICulture.Name.Split('-')[0];
             return n == "zh" || n == "en" || n == "pt" ? CultureInfo.CurrentUICulture.Name : n;
+        }
+
+        internal static Cookie[] ParseCookie(IResponse response)
+        {
+            CookieCollection cookieCollection = response.Headers.GetCookies(true);
+            Cookie[] cookies = new Cookie[cookieCollection.Count];
+            cookieCollection.CopyTo(cookies, 0);
+            return cookies;
         }
 
         [STAThread]
@@ -45,20 +53,14 @@ namespace SimpleBox.Utils
 
     public sealed class MallowResourceRequestHandler : ResourceRequestHandler
     {
-        private readonly MemoryStream _memoryStream = new MemoryStream();
-
-        protected override IResponseFilter GetResourceResponseFilter(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, IResponse response)
-        {
-            return new CefSharp.ResponseFilter.StreamResponseFilter(_memoryStream);
-        }
-
         protected override void OnResourceLoadComplete(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request,
             IResponse response, UrlRequestStatus status, long receivedContentLength)
         {
-            OnResponse?.Invoke(this, new KeyValuePair<IResponse, byte[]>(response, _memoryStream.ToArray()));
+            Cookie[] cookie = CefHelper.ParseCookie(response);
+            if (cookie.Any()) OnGetCookie?.Invoke(this, cookie);
         }
 
-        public event EventHandler<KeyValuePair<IResponse, byte[]>> OnResponse;
+        public event EventHandler<Cookie[]> OnGetCookie;
     }
 
     public sealed class MallowRequestHandler : RequestHandler
