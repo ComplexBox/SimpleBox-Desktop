@@ -31,7 +31,7 @@ namespace SimpleBox.Puller
             MallowGroup selectedMallowGroup = pullWindow.SelectedGroup;
             string createGroupName = pullWindow.CreateGroupName;
 
-            if (!isCreateMode || selectedMallowGroup is null)
+            if (!isCreateMode && selectedMallowGroup is null)
                 return;
 
             puller.Progress.IsIndeterminate = true;
