@@ -103,6 +103,15 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+            <TabItem Header="调试" Style="{DynamicResource SettingsTabItemStyle}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="24" DataContext="{x:Static models:Config.Current}">
+                        <TextBlock Text="拉取" Style="{DynamicResource SectionTextStyle}"/>
+                        <Button Content="启动登录窗口" Style="{DynamicResource ButtonRevealStyle}"
+                                Tag="CreateLoginWindow" Click="DebugButtonBase_OnClick"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
             <TabItem Header="关于" Style="{DynamicResource SettingsTabItemStyle}">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
                             Margin="0,-48,0,48">

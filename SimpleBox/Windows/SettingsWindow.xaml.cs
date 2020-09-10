@@ -58,6 +58,19 @@ namespace SimpleBox.Windows
             UpdateHelper.Current.TriggerProcess();
         }
 
+        private void DebugButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button is null) return;
+
+            switch (button.Tag)
+            {
+                case "CreateLoginWindow":
+                    new LoginWindow("https://baidu.com").ShowDialog();
+                    break;
+            }
+        }
+
         #endregion
     }
 }

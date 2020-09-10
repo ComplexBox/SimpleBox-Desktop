@@ -21,7 +21,7 @@ namespace SimpleBox.Windows
     /// </summary>
     public partial class LoginWindow
     {
-        public LoginWindow()
+        public LoginWindow(string address)
         {
             InitializeComponent();
 
@@ -29,12 +29,14 @@ namespace SimpleBox.Windows
             MallowRequestHandler requestHandler = new MallowRequestHandler(handler);
             Browser.RequestHandler = requestHandler;
             handler.OnResponse += BrowserHandlerOnOnResponse;
+
+            Browser.Address = address;
         }
 
         private void BrowserHandlerOnOnResponse(object sender, KeyValuePair<IResponse, byte[]> e)
         {
             IResponse response = e.Key;
-            byte[] data = e.Value;
+            string data = Encoding.UTF8.GetString(e.Value);
         }
     }
 }
