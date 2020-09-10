@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,13 +61,17 @@ namespace SimpleBox.Windows
 
         private void DebugButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            if (button is null) return;
+            if (!(sender is Button button)) return;
 
             switch (button.Tag)
             {
                 case "CreateLoginWindow":
-                    new LoginWindow("https://baidu.com").ShowDialog();
+                    LoginWindow window = new LoginWindow("https://baidu.com");
+                    window.Handler.OnGetCookie += (o, cookies) =>
+                    {
+                        foreach (Cookie cookie in cookies) Debug.WriteLine(cookie);
+                    };
+                    window.ShowDialog();
                     break;
             }
         }
