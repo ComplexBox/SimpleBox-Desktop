@@ -44,7 +44,7 @@ namespace SimpleBox.Puller
 
             puller.SaveCookie();
 
-            pullWindow.Close();
+            Application.Current.Dispatcher.Invoke(() => pullWindow.Close());
 
             if (mallows is null)
                 return;
