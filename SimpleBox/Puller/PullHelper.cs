@@ -39,7 +39,7 @@ namespace SimpleBox.Puller
             puller.Progress.IsIndeterminate = true;
             puller.Progress.Text = $"初始化{puller.Name}服务……";
 
-            Mallow[] mallows = puller.VerifyAndPull(isCreateMode ? selectedMallowGroup.Mallows.ToArray() : Array.Empty<Mallow>());
+            Mallow[] mallows = puller.VerifyAndPull(isCreateMode ? Array.Empty<Mallow>() : selectedMallowGroup.Mallows.ToArray());
 
             puller.Progress.IsIndeterminate = true;
             puller.Progress.Text = "保存用户信息……";
