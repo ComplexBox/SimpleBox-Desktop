@@ -326,7 +326,7 @@ namespace SimpleBox.Utils.Cef
 
         private static string ProcessExpireField(Match foundExpire) => foundExpire.Value.Replace(',', ReplacedChar);
 
-        private CookieCollection ParseSetCookie(string setCookieStr, string curDomain)
+        public CookieCollection ParseSetCookie(string setCookieStr, string curDomain)
         {
             CookieCollection parsedCookies = new CookieCollection();
 
