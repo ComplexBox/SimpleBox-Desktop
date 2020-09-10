@@ -20,6 +20,10 @@ namespace SimpleBox.Puller
 
         public string Name { get; } = "";
 
+        public Uri Host = new Uri("");
+
+        public string LoginAddress = "";
+
         public Progress Progress { get; } = new Progress();
 
         #endregion
@@ -29,8 +33,6 @@ namespace SimpleBox.Puller
         protected const string HttpAccept =
             "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3";
 
-        protected const string HttpAcceptEncoding = "UTF-8";
-
         protected readonly string HttpUserAgent =
             @"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.8 Safari/537.36 Edg/86.0.622.3";
 
@@ -38,7 +40,9 @@ namespace SimpleBox.Puller
 
         #region Cookie Utils
 
-        protected CookieContainer CookieContainer = new CookieContainer();
+        public CookieContainer CookieContainer = new CookieContainer();
+
+        public string[] CookieChecks = new string[0];
 
         protected bool TryLoadCookie()
         {
