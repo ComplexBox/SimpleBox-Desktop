@@ -242,9 +242,9 @@
     <Style x:Key="LoginWindowStyle" TargetType="fw:AcrylicWindow" BasedOn="{StaticResource {x:Type fw:AcrylicWindow}}">
         <Setter Property="Title" Value="登录"/>
         <Style.Triggers>
-            <Trigger SourceName="Browser" Property="IsLoading" Value="True">
+            <DataTrigger Binding="{Binding IsLoading, ElementName=Browser}" Value="True">
                 <Setter Property="Title" Value="正在加载……"/>
-            </Trigger>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
     
