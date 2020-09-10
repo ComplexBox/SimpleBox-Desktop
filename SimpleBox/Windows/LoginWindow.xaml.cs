@@ -61,6 +61,7 @@ namespace SimpleBox.Windows
                 if (puller.CookieChecks.Any(check => cookieArr.All(cookie => cookie.Name != check)))
                     return;
 
+                IsLoginComplete = true;
                 Close();
             };
 
@@ -71,5 +72,7 @@ namespace SimpleBox.Windows
         }
 
         public MallowResourceRequestHandler Handler { get; }
+
+        public bool IsLoginComplete;
     }
 }
