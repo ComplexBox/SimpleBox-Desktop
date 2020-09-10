@@ -28,6 +28,8 @@ namespace SimpleBox.Core
     {
         public static void Import(IMallowImporter importer)
         {
+            if (importer is null) return;
+
             CommonOpenFileDialog dialog = new CommonOpenFileDialog
             {
                 Title = $"选择{importer.Name}导出文件",

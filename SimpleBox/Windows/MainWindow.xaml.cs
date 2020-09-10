@@ -197,11 +197,16 @@ namespace SimpleBox.Windows
 
         #region Triggers - Import & Export
 
-        private void ImportFromSimpleBoxManagerClick(object sender, RoutedEventArgs e) =>
-            ImportExportHelper.Import(new SimpleBoxImporter());
-
-        private void ImportFromMarsherClick(object sender, RoutedEventArgs e) =>
-            ImportExportHelper.Import(new MarsherImporter());
+        private void ImportClick(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Button button)) return;
+            ImportExportHelper.Import(button.Tag switch
+            {
+                "SimpleBox" => new SimpleBoxImporter(),
+                "Marsher" => new MarsherImporter(),
+                _ => null
+            });
+        }
 
         private void ExportGroupClick(object sender, RoutedEventArgs e)
         {
