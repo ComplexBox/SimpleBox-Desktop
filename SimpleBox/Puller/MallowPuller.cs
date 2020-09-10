@@ -120,7 +120,7 @@ namespace SimpleBox.Puller
         {
             if (VerifyLogin()) return Pull(existingMallows);
 
-            bool isLoginComplete = Dispatcher.CurrentDispatcher.Invoke(() =>
+            bool isLoginComplete = App.Current.Dispatcher.Invoke(() =>
             {
                 LoginWindow loginWindow = new LoginWindow(this);
                 loginWindow.ShowDialog();
