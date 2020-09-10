@@ -49,21 +49,21 @@ namespace SimpleBox.Puller
 
         public CookieContainer CookieContainer;
 
-        protected CookieContainer LoadCookie()
+        private void LoadCookie()
         {
             if (!Config.Current.UserTokens.TryGetValue(Name, out string raw) ||
-                string.IsNullOrEmpty(raw)) return new CookieContainer();
+                string.IsNullOrEmpty(raw)) CookieContainer = new CookieContainer();
 
             XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
             
             try
             {
                 object data = serializer.Deserialize(new StringReader(raw));
-                return data as CookieContainer;
+                CookieContainer = data as CookieContainer;
             }
             catch (Exception)
             {
-                return new CookieContainer();
+                CookieContainer = new CookieContainer();
             }
         }
 

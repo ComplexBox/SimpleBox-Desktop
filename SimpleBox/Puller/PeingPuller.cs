@@ -22,8 +22,6 @@ namespace SimpleBox.Puller
             = XPathExpression.Compile("//div[@data-questions]");
         private readonly XPathExpression _findLoadLastPageEx = XPathExpression.Compile("//span[contains(@class, 'last')]//a");
 
-        public PeingPuller() => LoadCookie();
-
         protected override Mallow[] Pull(Mallow[] existingMallows)
         {
             List<Mallow> mallows = new List<Mallow>();
