@@ -66,10 +66,10 @@ namespace SimpleBox.Windows
             switch (button.Tag)
             {
                 case "CreateLoginWindow":
-                    LoginWindow window = new LoginWindow("https://baidu.com");
+                    LoginWindow window = new LoginWindow(RenameWindow.Rename(""));
                     window.Handler.OnGetCookie += (o, cookies) =>
                     {
-                        foreach (Cookie cookie in cookies) Debug.WriteLine(cookie);
+                        foreach (Cookie cookie in cookies) Debug.WriteLine($"NCOOKIE {cookie.Name}={cookie.Value}");
                     };
                     window.ShowDialog();
                     break;
