@@ -73,7 +73,7 @@ namespace SimpleBox.Utils.Cef
             return needAdd;
         }
 
-        private string ExtractHost(string url)
+        private static string ExtractHost(string url)
         {
             string domain = "";
             if (url == "" || !url.Contains("/")) return domain;
@@ -82,15 +82,20 @@ namespace SimpleBox.Utils.Cef
             return domain;
         }
 
-        public string GetDomainUrl(string url)
+        public static string ExtractDomain(string url)
         {
-            string domainUrl = "";
+            string domain = "";
+            string host = ExtractHost(url);
+            if (!host.Contains(".")) return domain;
+            domain = Regex.IsMatch(host, @"\w\.\w") ? host : host.Substring(host.IndexOf('.'));
+            return domain;
+        }
 
+        public static string GetDomainUrl(string url)
+        {
             Regex urlRx = new Regex(@"((https)|(http)|(ftp))://[\w\-\.]+");
             Match foundUrl = urlRx.Match(url);
-            domainUrl = foundUrl.Success ? url.Substring(0, foundUrl.Length) : "";
-
-            return domainUrl;
+            return foundUrl.Success ? url.Substring(0, foundUrl.Length) : "";
         }
 
         private bool AddFieldToCookie(ref Cookie ck, PairItem pairInfo)

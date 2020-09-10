@@ -21,7 +21,7 @@ namespace SimpleBox.Utils.Cef
 
         internal static CookieCollection ParseCookie(IRequest request, IResponse response) =>
             CookieHelper.Current.ParseSetCookie(response.Headers["Set-Cookie"],
-                CookieHelper.Current.GetDomainUrl(request.Url));
+                CookieHelper.ExtractDomain(request.Url));
 
         [STAThread]
         public static void Initialize()
