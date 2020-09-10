@@ -20,13 +20,13 @@ namespace SimpleBox.Puller
     {
         #region User Data
 
-        public string Name { get; }
+        public abstract string Name { get; }
 
-        public Uri Host;
+        public abstract Uri Host { get; }
 
-        public string LoginAddress;
+        public abstract string LoginAddress { get; }
 
-        protected string VerifyAddress;
+        protected abstract string VerifyAddress { get; }
 
         public Progress Progress { get; } = new Progress();
 
