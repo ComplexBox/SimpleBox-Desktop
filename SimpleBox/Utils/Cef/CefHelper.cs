@@ -6,11 +6,9 @@ using CefSharp;
 using CefSharp.Handler;
 using CefSharp.Wpf;
 using SimpleBox.Helpers;
-using WebSocketSharp;
-using WebSocketSharp.Net;
 using Cookie = System.Net.Cookie;
 
-namespace SimpleBox.Utils
+namespace SimpleBox.Utils.Cef
 {
     public static class CefHelper
     {
@@ -22,7 +20,7 @@ namespace SimpleBox.Utils
 
         internal static Cookie[] ParseCookie(IResponse response)
         {
-            CookieCollection cookieCollection = response.Headers.GetCookies(true);
+            //CookieCollection cookieCollection = response.Headers.GetCookies(true);
             Cookie[] cookies = new Cookie[cookieCollection.Count];
             for (int i = 0; i < cookieCollection.Count; i++)
             {
@@ -62,14 +60,14 @@ namespace SimpleBox.Utils
             settings.UserAgent =
                 @"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.8 Safari/537.36 Edg/86.0.622.3";
 
-            Cef.EnableHighDPISupport();
+            CefSharp.Cef.EnableHighDPISupport();
             CefSharpSettings.ShutdownOnExit = false;
 
-            Cef.Initialize(settings, true, browserProcessHandler: null);
+            CefSharp.Cef.Initialize(settings, true, browserProcessHandler: null);
         }
 
         [STAThread]
-        public static void Shutdown() => Cef.Shutdown();
+        public static void Shutdown() => CefSharp.Cef.Shutdown();
     }
 
     public sealed class MallowResourceRequestHandler : ResourceRequestHandler

@@ -10,6 +10,7 @@ using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SimpleBox.Utils;
+using SimpleBox.Utils.Cef;
 using SimpleBox.Windows;
 using SourceChord.FluentWPF;
 using Squirrel;

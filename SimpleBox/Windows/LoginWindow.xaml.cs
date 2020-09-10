@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using CefSharp;
 using SimpleBox.Puller;
 using SimpleBox.Utils;
+using SimpleBox.Utils.Cef;
 using Cookie = System.Net.Cookie;
 
 namespace SimpleBox.Windows

@@ -23,6 +23,7 @@ using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SimpleBox.Puller;
 using SimpleBox.Utils;
+using SimpleBox.Utils.Cef;
 using SourceChord.FluentWPF;
 
 namespace SimpleBox.Windows
