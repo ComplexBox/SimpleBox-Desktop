@@ -77,6 +77,7 @@
     <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Utils\Cef\CefHelper.cs" />
+    <Compile Include="Utils\Cef\CookieHelper.cs" />
     <Compile Include="Utils\State\IModified.cs" />
     <Compile Include="Models\Mallow.cs" />
     <Compile Include="Models\MallowGroup.cs" />
