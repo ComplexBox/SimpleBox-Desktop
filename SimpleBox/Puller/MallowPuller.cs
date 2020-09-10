@@ -7,10 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Serialization;
 using SimpleBox.Core;
 using SimpleBox.Models;
 using SimpleBox.Utils.State;
+using SimpleBox.Windows;
 
 namespace SimpleBox.Puller
 {
@@ -18,11 +20,13 @@ namespace SimpleBox.Puller
     {
         #region User Data
 
-        public string Name { get; } = "";
+        public string Name { get; }
 
-        public Uri Host = new Uri("");
+        public Uri Host;
 
-        public string LoginAddress = "";
+        public string LoginAddress;
+
+        protected string VerifyAddress;
 
         public Progress Progress { get; } = new Progress();
 
@@ -94,6 +98,41 @@ namespace SimpleBox.Puller
             request.CookieContainer = CookieContainer;
             return request;
         }
+
+        #endregion
+
+        #region Verify Utils
+
+        private bool VerifyLogin()
+        {
+            HttpWebRequest request = CreateWebRequest(VerifyAddress);
+            return request.GetResponse() is HttpWebResponse response && response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public Mallow[] VerifyAndPull(Mallow[] existingMallows)
+        {
+            if (VerifyLogin()) return Pull(existingMallows);
+
+            LoginWindow loginWindow = new LoginWindow(this);
+            loginWindow.ShowDialog();
+            if (!loginWindow.IsLoginComplete) return null;
+
+            if (VerifyLogin()) return Pull(existingMallows);
+
+            MessageBox.Show(
+                $"无法登录到{Name}服务，因此无法拉取。",
+                "错误",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error,
+                MessageBoxResult.OK);
+            return null;
+        }
+
+        #endregion
+
+        #region Interface
+
+        protected abstract Mallow[] Pull(Mallow[] existingMallows);
 
         #endregion
     }
