@@ -59,7 +59,7 @@ namespace SimpleBox.Windows
             MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             Browser.RequestHandler = requestHandler;
 
-            Browser.Address = puller.LoginAddress;
+            Browser.Address = puller.Address;
 
             Timer timer = new Timer(4000)
             {

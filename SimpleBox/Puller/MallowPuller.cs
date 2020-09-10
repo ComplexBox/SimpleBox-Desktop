@@ -22,9 +22,7 @@ namespace SimpleBox.Puller
 
         public abstract string Name { get; }
 
-        public abstract string LoginAddress { get; }
-
-        protected abstract string VerifyAddress { get; }
+        public abstract string Address { get; }
 
         public Progress Progress { get; } = new Progress();
 
@@ -105,7 +103,7 @@ namespace SimpleBox.Puller
 
         public bool VerifyLogin()
         {
-            HttpWebRequest request = CreateWebRequest(VerifyAddress);
+            HttpWebRequest request = CreateWebRequest(Address);
             request.AllowAutoRedirect = false;
             return request.GetResponse() is HttpWebResponse response && response.StatusCode == HttpStatusCode.OK;
         }
