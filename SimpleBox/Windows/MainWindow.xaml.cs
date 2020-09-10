@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
+using SimpleBox.Puller;
 using SimpleBox.Utils;
 using SourceChord.FluentWPF;
 
@@ -204,6 +205,17 @@ namespace SimpleBox.Windows
             {
                 "SimpleBox" => new SimpleBoxImporter(),
                 "Marsher" => new MarsherImporter(),
+                _ => null
+            });
+        }
+
+        private void PullClick(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Button button)) return;
+            PullHelper.Pull(button.Tag switch
+            {
+                "Marshmallow" => new MarshmallowPuller(),
+                "Peing" => new PeingPuller(),
                 _ => null
             });
         }

@@ -266,6 +266,21 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <Separator/>
+                                <MenuItem Header="拉取…" IsEnabled="False" />
+                                <Separator Background="#30FFFFFF" />
+                                <MenuItem Header="从Marshmallow拉取…"
+                                          Click="PullClick" Tag="Marshmallow">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Download" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="从Peing拉取…"
+                                          Click="PullClick" Tag="Peing">
+                                    <MenuItem.Icon>
+                                        <controls:FluentMenuIcon Symbol="Download" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <Separator/>
                                 <MenuItem Header="导出…" IsEnabled="False" />
                                 <Separator Background="#30FFFFFF" />
                                 <MenuItem Header="导出分组到文件…" Click="ExportGroupClick">

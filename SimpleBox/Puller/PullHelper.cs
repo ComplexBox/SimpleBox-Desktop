@@ -17,6 +17,8 @@ namespace SimpleBox.Puller
     {
         public static void Pull(MallowPuller puller)
         {
+            if (puller is null) return;
+            
             EventWaitHandle handle = new AutoResetEvent(true);
             PullWindow pullWindow = new PullWindow(puller, handle);
             Task.Factory.StartNew(PullCore, pullWindow);
