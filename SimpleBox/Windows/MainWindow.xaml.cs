@@ -200,8 +200,8 @@ namespace SimpleBox.Windows
 
         private void ImportClick(object sender, RoutedEventArgs e)
         {
-            if (!(sender is Button button)) return;
-            ImportExportHelper.Import(button.Tag switch
+            if (!(sender is MenuItem menuItem)) return;
+            ImportExportHelper.Import(menuItem.Tag switch
             {
                 "SimpleBox" => new SimpleBoxImporter(),
                 "Marsher" => new MarsherImporter(),
@@ -211,8 +211,8 @@ namespace SimpleBox.Windows
 
         private void PullClick(object sender, RoutedEventArgs e)
         {
-            if (!(sender is Button button)) return;
-            PullHelper.Pull(button.Tag switch
+            if (!(sender is MenuItem menuItem)) return;
+            PullHelper.Pull(menuItem.Tag switch
             {
                 "Marshmallow" => new MarshmallowPuller(),
                 "Peing" => new PeingPuller(),
