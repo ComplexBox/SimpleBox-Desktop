@@ -27,22 +27,24 @@ namespace SimpleBox.Utils
             for (int i = 0; i < cookieCollection.Count; i++)
             {
                 WebSocketSharp.Net.Cookie cookie = cookieCollection[i];
-                cookies[i] = new Cookie
-                {
-                    Name = cookie.Name,
-                    Value = cookie.Value,
-                    Comment = cookie.Comment,
-                    CommentUri = cookie.CommentUri,
-                    Discard = cookie.Discard,
-                    Domain = cookie.Domain,
-                    Expired = cookie.Expired,
-                    Expires = cookie.Expires,
-                    HttpOnly = cookie.HttpOnly,
-                    Path = cookie.Path,
-                    Port = cookie.Port,
-                    Secure = cookie.Secure,
-                    Version = cookie.Version
-                };
+                //cookies[i] = new Cookie
+                //{
+                //    Name = cookie.Name,
+                //    Value = cookie.Value,
+                //    Comment = cookie.Comment,
+                //    CommentUri = cookie.CommentUri,
+                //    Discard = cookie.Discard,
+                //    Domain = cookie.Domain,
+                //    Expired = cookie.Expired,
+                //    Expires = cookie.Expires,
+                //    HttpOnly = cookie.HttpOnly,
+                //    Path = cookie.Path,
+                //    Port = cookie.Port,
+                //    Secure = cookie.Secure,
+                //    Version = cookie.Version
+                //};
+
+                cookies[i] = new Cookie(cookie.Name, cookie.Value);
             }
             return cookies;
         }
