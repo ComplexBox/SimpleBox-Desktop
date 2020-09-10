@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Serialization;
 using SimpleBox.Core;
 using SimpleBox.Models;
@@ -112,9 +113,15 @@ namespace SimpleBox.Puller
         {
             if (VerifyLogin()) return Pull(existingMallows);
 
-            LoginWindow loginWindow = new LoginWindow(this);
-            loginWindow.ShowDialog();
-            if (!loginWindow.IsLoginComplete) return null;
+            bool isLoginComplete = Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
+                LoginWindow loginWindow = new LoginWindow(this);
+                loginWindow.ShowDialog();
+
+                return loginWindow.IsLoginComplete;
+            });
+
+            if (!isLoginComplete) return null;
 
             if (VerifyLogin()) return Pull(existingMallows);
 
