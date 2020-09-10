@@ -70,13 +70,6 @@ namespace SimpleBox.Utils
             _handler = handler;
         }
 
-        protected override bool OnBeforeBrowse(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool userGesture,
-            bool isRedirect)
-        {
-            request.SetHeaderByName("Accept-Language", CultureInfo.CurrentUICulture.Name, true);
-            return base.OnBeforeBrowse(chromiumWebBrowser, browser, frame, request, userGesture, isRedirect);
-        }
-
         protected override IResourceRequestHandler GetResourceRequestHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame,
             IRequest request, bool isNavigation, bool isDownload, string requestInitiator, ref bool disableDefaultHandling)
         {
