@@ -86,7 +86,7 @@ namespace SimpleBox.Windows
             }
         }
 
-        private bool _isCreateMode;
+        private bool _isCreateMode = true;
 
         public bool IsCreateMode
         {

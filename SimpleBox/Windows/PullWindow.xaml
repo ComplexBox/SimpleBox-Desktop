@@ -42,49 +42,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <RadioButton Grid.Column="0" Content="将新提问补充到列表："
-                                 Tag="InsertModeRadioButton"
-                                 Click="ModeChangeClick"
-                                 MinWidth="200"
-                                 GroupName="PullMode"
-                                 Foreground="White"
-                                 IsChecked="True"/>
-
-                    <Grid Grid.Column="1">
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Setter Property="IsEnabled" Value="False"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsCreateMode, ElementName=RootElement}" Value="False">
-                                        <Setter Property="IsEnabled" Value="True"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
-                        <ComboBox DataContext="{x:Static models:MallowSource.CurrentSource}"
-                                  ItemsSource="{Binding CurrentSource.Data}"
-                                  DisplayMemberPath="Name"
-                                  SelectedItem="{Binding SelectedGroup, ElementName=RootElement}"/>
-                    </Grid>
-
-                </Grid>
-
-                <TextBlock Margin="24,6"
-                           Text="这将只会拉取比列表中的提问更新的提问。"
-                           TextWrapping="Wrap"/>
-
-                <Grid Margin="12,6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
                     <RadioButton Grid.Column="0" Content="新建一个列表："
                                  Tag="CreateModeRadioButton"
                                  Click="ModeChangeClick"
                                  MinWidth="200"
                                  GroupName="PullMode"
-                                 Foreground="White"/>
+                                 Foreground="White"
+                                 IsChecked="True"
+                                 VerticalAlignment="Center"/>
 
                     <Grid Grid.Column="1">
                         <Grid.Style>
@@ -103,6 +68,44 @@
                     </Grid>
 
                 </Grid>
+
+                <Grid Margin="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0" Content="将新提问补充到列表："
+                                 Tag="InsertModeRadioButton"
+                                 Click="ModeChangeClick"
+                                 MinWidth="200"
+                                 GroupName="PullMode"
+                                 Foreground="White"
+                                 VerticalAlignment="Center"/>
+
+                    <Grid Grid.Column="1">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsCreateMode, ElementName=RootElement}" Value="False">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <ComboBox DataContext="{x:Static models:MallowSource.CurrentSource}"
+                                  ItemsSource="{Binding CurrentSource.Data}"
+                                  DisplayMemberPath="Name"
+                                  SelectedItem="{Binding SelectedGroup, ElementName=RootElement}"
+                                  SelectedIndex="0"/>
+                    </Grid>
+
+                </Grid>
+
+                <TextBlock Margin="24,6"
+                           Text="这将只会拉取比列表中的提问更新的提问。"
+                           TextWrapping="Wrap"/>
 
             </StackPanel>
         </Grid>

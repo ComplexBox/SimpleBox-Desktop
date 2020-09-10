@@ -36,6 +36,9 @@ namespace SimpleBox.Puller
             MallowGroup selectedMallowGroup = pullWindow.SelectedGroup;
             string createGroupName = pullWindow.CreateGroupName;
 
+            if (!isCreateMode || selectedMallowGroup is null)
+                return;
+
             puller.Progress.IsIndeterminate = true;
             puller.Progress.Text = $"初始化{puller.Name}服务……";
 
