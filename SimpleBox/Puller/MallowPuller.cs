@@ -2,10 +2,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using SimpleBox.Core;
 using SimpleBox.Models;
 using SimpleBox.Utils.State;
@@ -38,11 +40,43 @@ namespace SimpleBox.Puller
 
         protected CookieContainer CookieContainer = new CookieContainer();
 
-        protected string Cookie = "";
+        protected bool TryLoadCookie()
+        {
+            if (!Config.Current.UserTokens.TryGetValue(Name, out string raw) ||
+                string.IsNullOrEmpty(raw)) return false;
 
-        protected bool TryLoadCookie() => Config.Current.UserTokens.TryGetValue(Name, out Cookie);
+            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
 
-        protected void SaveCookie() => Config.Current.UserTokens[Name] = Cookie;
+            try
+            {
+                object data = serializer.Deserialize(new StringReader(raw));
+                CookieContainer = data as CookieContainer;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        protected void SaveCookie()
+        {
+            StringWriter stringWriter = new StringWriter();
+            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
+
+            try
+            {
+                serializer.Serialize(stringWriter, CookieContainer);
+            }
+            catch (Exception)
+            {
+                Config.Current.UserTokens.Remove(Name);
+                return;
+            }
+
+            Config.Current.UserTokens[Name] = stringWriter.ToString();
+        }
 
         #endregion
 
