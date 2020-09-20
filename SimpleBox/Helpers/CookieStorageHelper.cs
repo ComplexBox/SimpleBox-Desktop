@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace SimpleBox.Helpers
 {
@@ -19,19 +20,15 @@ namespace SimpleBox.Helpers
 
         #region Storage Helper
 
-        private static string GetConfigFileName() => Path.Combine(ConfigHelper.GetConfigFolder(), "cookies.xml");
+        private static string GetConfigFileName() => Path.Combine(ConfigHelper.GetConfigFolder(), "cookies.json");
 
         private static CookieCollection LoadData()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieCollection));
-
             try
             {
                 if (!File.Exists(GetConfigFileName())) throw new Exception();
 
-                object data = serializer.Deserialize(new StringReader(File.ReadAllText(GetConfigFileName())));
-
-                return data as CookieCollection;
+                return JsonConvert.DeserializeObject<CookieCollection>(File.ReadAllText(GetConfigFileName()));
             }
             catch (Exception)
             {
@@ -41,14 +38,9 @@ namespace SimpleBox.Helpers
 
         public static void SaveData()
         {
-            StringWriter stringWriter = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieCollection));
-
             try
             {
-                serializer.Serialize(stringWriter, CurrentCookies);
-
-                File.WriteAllText(GetConfigFileName(), stringWriter.ToString());
+                File.WriteAllText(GetConfigFileName(), JsonConvert.SerializeObject(CurrentCookies));
             }
             catch (Exception)
             {
