@@ -75,6 +75,10 @@ namespace SimpleBox
 
             string updateMode = UpdateHelper.Current.UpdateMode;
 
+            // Initialize CookieManager
+
+            System.Net.CookieContainer cookieContainer = CookieStorageHelper.CurrentCookieContainer;
+
             // Initialize WebPush
 
             WebPush.Current = new WebPush();

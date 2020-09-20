@@ -59,6 +59,7 @@ namespace SimpleBox.Windows
         private void OnClosing(object sender, CancelEventArgs e)
         {
             StorageHelper.SaveData(MallowSource.CurrentSource);
+            CookieStorageHelper.SaveData();
             ConfigHelper.SaveConfig(Config.Current);
             WebPush.Current.Stop();
             CefHelper.Shutdown();
