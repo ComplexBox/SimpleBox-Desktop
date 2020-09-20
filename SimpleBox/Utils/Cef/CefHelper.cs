@@ -27,12 +27,7 @@ namespace SimpleBox.Utils.Cef
 
         public static async Task CollectCookies()
         {
-            ICookieManager cookieManager = CefSharp.Cef.GetGlobalCookieManager();
-            TaskCookieVisitor cookieVisitor = new TaskCookieVisitor();
-
-            cookieManager.VisitAllCookies(cookieVisitor);
-
-            List<CefSharp.Cookie> cookies = await cookieVisitor.Task;
+            List<CefSharp.Cookie> cookies = await CefSharp.Cef.GetGlobalCookieManager().VisitAllCookiesAsync();
 
             CookieStorageHelper.CurrentCookies = new CookieCollection();
 

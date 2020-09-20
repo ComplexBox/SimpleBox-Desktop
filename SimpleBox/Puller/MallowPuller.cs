@@ -50,7 +50,20 @@ namespace SimpleBox.Puller
             request.Accept = HttpAccept;
             request.CookieContainer = new CookieContainer();
             await CefHelper.CollectCookies();
-            request.CookieContainer.Add(CookieStorageHelper.CurrentCookies);
+            //request.CookieContainer.Add(CookieStorageHelper.CurrentCookies);
+
+            foreach (Cookie cookie in CookieStorageHelper.CurrentCookies)
+            {
+                try
+                {
+                    request.CookieContainer.Add(cookie);
+                }
+                catch (CookieException)
+                {
+                    // Ignore
+                }
+            }
+
             return request;
         }
 
