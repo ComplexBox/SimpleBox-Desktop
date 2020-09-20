@@ -59,23 +59,6 @@ namespace SimpleBox.Windows
             UpdateHelper.Current.TriggerProcess();
         }
 
-        private void DebugButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (!(sender is Button button)) return;
-
-            switch (button.Tag)
-            {
-                case "CreateLoginWindow":
-                    LoginWindow window = new LoginWindow(RenameWindow.Rename(""));
-                    window.Handler.OnGetCookie += (o, cookies) =>
-                    {
-                        foreach (Cookie cookie in cookies) Debug.WriteLine($"NCOOKIE {cookie.Name}={cookie.Value}");
-                    };
-                    window.ShowDialog();
-                    break;
-            }
-        }
-
         #endregion
     }
 }
