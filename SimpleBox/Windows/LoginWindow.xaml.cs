@@ -36,8 +36,8 @@ namespace SimpleBox.Windows
             InitializeComponent();
 
             Handler = new MallowResourceRequestHandler();
-            MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
-            Browser.RequestHandler = requestHandler;
+            //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
+            //Browser.RequestHandler = requestHandler;
 
             Browser.Address = address;
         }
@@ -57,8 +57,8 @@ namespace SimpleBox.Windows
                 foreach (Cookie cookie in cookies) puller.CookieContainer.Add(cookie);
             };
 
-            MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
-            Browser.RequestHandler = requestHandler;
+            //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
+            //Browser.RequestHandler = requestHandler;
 
             Browser.Address = puller.Address;
 
