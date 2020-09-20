@@ -48,8 +48,9 @@ namespace SimpleBox.Puller
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.UserAgent = HttpUserAgent;
             request.Accept = HttpAccept;
-            request.CookieContainer = CookieStorageHelper.CurrentCookieContainer;
+            request.CookieContainer = new CookieContainer();
             await CefHelper.CollectCookies();
+            request.CookieContainer.Add(CookieStorageHelper.CurrentCookies);
             return request;
         }
 

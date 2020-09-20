@@ -34,9 +34,11 @@ namespace SimpleBox.Utils.Cef
 
             List<CefSharp.Cookie> cookies = await cookieVisitor.Task;
 
+            CookieStorageHelper.CurrentCookies = new CookieCollection();
+
             foreach (Cookie c in cookies.Select(ConvertCookie).Where(c => c != null))
             {
-                CookieStorageHelper.CurrentCookieContainer.Add(c);
+                CookieStorageHelper.CurrentCookies.Add(c);
             }
         }
 

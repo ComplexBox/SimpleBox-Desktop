@@ -13,7 +13,7 @@ namespace SimpleBox.Helpers
     {
         #region Current
 
-        public static CookieContainer CurrentCookieContainer { get; } = LoadData();
+        public static CookieCollection CurrentCookies { get; set; } = LoadData();
 
         #endregion
 
@@ -21,31 +21,32 @@ namespace SimpleBox.Helpers
 
         private static string GetConfigFileName() => Path.Combine(ConfigHelper.GetConfigFolder(), "cookies.xml");
 
-        private static CookieContainer LoadData()
+        private static CookieCollection LoadData()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
+            XmlSerializer serializer = new XmlSerializer(typeof(CookieCollection));
 
             try
             {
                 if (!File.Exists(GetConfigFileName())) throw new Exception();
 
                 object data = serializer.Deserialize(new StringReader(File.ReadAllText(GetConfigFileName())));
-                return data as CookieContainer;
+
+                return data as CookieCollection;
             }
             catch (Exception)
             {
-                return new CookieContainer();
+                return new CookieCollection();
             }
         }
 
         public static void SaveData()
         {
             StringWriter stringWriter = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
+            XmlSerializer serializer = new XmlSerializer(typeof(CookieCollection));
 
             try
             {
-                serializer.Serialize(stringWriter, CurrentCookieContainer);
+                serializer.Serialize(stringWriter, CurrentCookies);
 
                 File.WriteAllText(GetConfigFileName(), stringWriter.ToString());
             }

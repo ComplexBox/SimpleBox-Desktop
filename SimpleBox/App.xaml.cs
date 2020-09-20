@@ -77,7 +77,7 @@ namespace SimpleBox
 
             // Initialize CookieManager
 
-            System.Net.CookieContainer cookieContainer = CookieStorageHelper.CurrentCookieContainer;
+            System.Net.CookieCollection cookieCollection = CookieStorageHelper.CurrentCookies;
 
             // Initialize WebPush
 
