@@ -22,14 +22,14 @@ namespace SimpleBox.Puller
             = XPathExpression.Compile("//div[@data-questions]");
         private readonly XPathExpression _findLoadLastPageEx = XPathExpression.Compile("//span[contains(@class, 'last')]//a");
 
-        protected override Mallow[] Pull(Mallow[] existingMallows)
+        protected override async Task<Mallow[]> Pull(Mallow[] existingMallows)
         {
             List<Mallow> mallows = new List<Mallow>();
 
             int totalPages = 1;
             for (int i = 1; i <= totalPages; i++)
             {
-                HttpWebRequest req = CreateWebRequest($"https://peing.net/zh-CN/box?page={i}");
+                HttpWebRequest req = await CreateWebRequest($"https://peing.net/zh-CN/box?page={i}");
                 try
                 {
                     HttpWebResponse resp = (HttpWebResponse)req.GetResponse();

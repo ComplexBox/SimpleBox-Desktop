@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using CefSharp;
 using CefSharp.Handler;
 using CefSharp.Wpf;
@@ -22,6 +24,37 @@ namespace SimpleBox.Utils.Cef
         internal static CookieCollection ParseCookie(IRequest request, IResponse response) =>
             CookieHelper.Current.ParseSetCookie(response.Headers["Set-Cookie"],
                 CookieHelper.ExtractDomain(request.Url));
+
+        public static async Task CollectCookies()
+        {
+            ICookieManager cookieManager = CefSharp.Cef.GetGlobalCookieManager();
+            TaskCookieVisitor cookieVisitor = new TaskCookieVisitor();
+
+            cookieManager.VisitAllCookies(cookieVisitor);
+
+            List<CefSharp.Cookie> cookies = await cookieVisitor.Task;
+
+            foreach (Cookie c in cookies.Select(ConvertCookie).Where(c => c != null))
+            {
+                CookieStorageHelper.CurrentCookieContainer.Add(c);
+            }
+        }
+
+        private static Cookie ConvertCookie(CefSharp.Cookie cookie)
+        {
+            return cookie.Expires != null
+                ? new Cookie
+                {
+                    Name = cookie.Name,
+                    Value = cookie.Value,
+                    Domain = cookie.Domain,
+                    Expires = (DateTime) cookie.Expires,
+                    HttpOnly = cookie.HttpOnly,
+                    Path = cookie.Path,
+                    Secure = cookie.Secure,
+                }
+                : null;
+        }
 
         [STAThread]
         public static void Initialize()

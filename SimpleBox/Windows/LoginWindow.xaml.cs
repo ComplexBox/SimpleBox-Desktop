@@ -77,11 +77,11 @@ namespace SimpleBox.Windows
 
             bool isTickRunning = false;
 
-            timer.Elapsed += (sender, args) =>
+            timer.Elapsed += async (sender, args) =>
             {
                 if (!isTickRunning) isTickRunning = true;
                 else return;
-                if (!puller.VerifyLogin())
+                if (!(await puller.VerifyLogin()))
                 {
                     isTickRunning = false;
                     return;

@@ -25,14 +25,14 @@ namespace SimpleBox.Puller
             XPathExpression.Compile("//a[contains(@class, 'load-more')]");
         private readonly Regex _extractIdEx = new Regex("/messages/([a-zA-Z0-9\\-]+)");
 
-        protected override Mallow[] Pull(Mallow[] existingMallows)
+        protected override async Task<Mallow[]> Pull(Mallow[] existingMallows)
         {
             List<Mallow> mallows = new List<Mallow>();
 
             string nextUri = Address;
             while (true)
             {
-                HttpWebRequest req = CreateWebRequest(nextUri);
+                HttpWebRequest req = await CreateWebRequest(nextUri);
                 req.AllowAutoRedirect = false;
                 try
                 {

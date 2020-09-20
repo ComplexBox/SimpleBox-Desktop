@@ -13,6 +13,7 @@ using System.Xml.Serialization;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
+using SimpleBox.Utils.Cef;
 using SimpleBox.Utils.State;
 using SimpleBox.Windows;
 
@@ -42,12 +43,13 @@ namespace SimpleBox.Puller
 
         #region Request Utils
 
-        protected HttpWebRequest CreateWebRequest(string uri)
+        protected async Task<HttpWebRequest> CreateWebRequest(string uri)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.UserAgent = HttpUserAgent;
             request.Accept = HttpAccept;
             request.CookieContainer = CookieStorageHelper.CurrentCookieContainer;
+            await CefHelper.CollectCookies();
             return request;
         }
 
@@ -55,9 +57,9 @@ namespace SimpleBox.Puller
 
         #region Verify Utils
 
-        public bool VerifyLogin()
+        public async Task<bool> VerifyLogin()
         {
-            HttpWebRequest request = CreateWebRequest(Address);
+            HttpWebRequest request = await CreateWebRequest(Address);
             request.AllowAutoRedirect = false;
             try
             {
@@ -69,11 +71,11 @@ namespace SimpleBox.Puller
             }
         }
 
-        public Mallow[] VerifyAndPull(Mallow[] existingMallows)
+        public async Task<Mallow[]> VerifyAndPull(Mallow[] existingMallows)
         {
-            if (VerifyLogin()) return Pull(existingMallows);
+            if (await VerifyLogin()) return await Pull(existingMallows);
 
-            bool isLoginComplete = App.Current.Dispatcher.Invoke(() =>
+            bool isLoginComplete = Application.Current.Dispatcher.Invoke(() =>
             {
                 LoginWindow loginWindow = new LoginWindow(this);
                 loginWindow.ShowDialog();
@@ -83,7 +85,7 @@ namespace SimpleBox.Puller
 
             if (!isLoginComplete) return null;
 
-            if (VerifyLogin()) return Pull(existingMallows);
+            if (await VerifyLogin()) return await Pull(existingMallows);
 
             MessageBox.Show(
                 $"无法登录到{Name}服务，因此无法拉取。",
@@ -98,7 +100,7 @@ namespace SimpleBox.Puller
 
         #region Interface
 
-        protected abstract Mallow[] Pull(Mallow[] existingMallows);
+        protected abstract Task<Mallow[]> Pull(Mallow[] existingMallows);
 
         #endregion
     }
