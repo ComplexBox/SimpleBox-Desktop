@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using SimpleBox.Core;
+using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SimpleBox.Utils.State;
 using SimpleBox.Windows;
@@ -42,7 +43,7 @@ namespace SimpleBox.Puller
             puller.Progress.IsIndeterminate = true;
             puller.Progress.Text = "保存用户信息……";
 
-            puller.SaveCookie();
+            CookieStorageHelper.SaveData();
 
             Application.Current.Dispatcher.Invoke(() => pullWindow.Close());
 

@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CefSharp;
+using SimpleBox.Helpers;
 using SimpleBox.Puller;
 using SimpleBox.Utils;
 using SimpleBox.Utils.Cef;
@@ -35,7 +36,7 @@ namespace SimpleBox.Windows
         {
             InitializeComponent();
 
-            Handler = new MallowResourceRequestHandler();
+            //Handler = new MallowResourceRequestHandler();
             //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             //Browser.RequestHandler = requestHandler;
 
@@ -50,12 +51,12 @@ namespace SimpleBox.Windows
         {
             InitializeComponent();
 
-            Handler = new MallowResourceRequestHandler();
+            //Handler = new MallowResourceRequestHandler();
 
-            Handler.OnGetCookie += (sender, cookies) =>
-            {
-                foreach (Cookie cookie in cookies) puller.CookieContainer.Add(cookie);
-            };
+            //Handler.OnGetCookie += (sender, cookies) =>
+            //{
+            //    foreach (Cookie cookie in cookies) CookieStorageHelper.CurrentCookieContainer.Add(cookie);
+            //};
 
             //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             //Browser.RequestHandler = requestHandler;
@@ -92,7 +93,7 @@ namespace SimpleBox.Windows
             };
         }
 
-        public MallowResourceRequestHandler Handler { get; }
+        //public MallowResourceRequestHandler Handler { get; }
 
         public bool IsLoginComplete;
     }

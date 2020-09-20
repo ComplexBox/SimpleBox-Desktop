@@ -64,9 +64,6 @@ namespace SimpleBox.Models
             }
         }
 
-        [JsonProperty("userPasses")]
-        public Dictionary<string, string> UserTokens { get; set; } = new Dictionary<string, string>();
-
         #endregion
 
         #region Property Changed

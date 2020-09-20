@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using SimpleBox.Core;
+using SimpleBox.Helpers;
 using SimpleBox.Models;
 using SimpleBox.Utils.State;
 using SimpleBox.Windows;
@@ -39,54 +40,6 @@ namespace SimpleBox.Puller
 
         #endregion
 
-        #region Constructor
-
-        protected MallowPuller() => LoadCookie();
-
-        #endregion
-
-        #region Cookie Utils
-
-        public CookieContainer CookieContainer;
-
-        private void LoadCookie()
-        {
-            if (!Config.Current.UserTokens.TryGetValue(Name, out string raw) ||
-                string.IsNullOrEmpty(raw)) CookieContainer = new CookieContainer();
-
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
-            
-            try
-            {
-                object data = serializer.Deserialize(new StringReader(raw));
-                CookieContainer = data as CookieContainer;
-            }
-            catch (Exception)
-            {
-                CookieContainer = new CookieContainer();
-            }
-        }
-
-        public void SaveCookie()
-        {
-            StringWriter stringWriter = new StringWriter();
-            XmlSerializer serializer = new XmlSerializer(typeof(CookieContainer));
-
-            try
-            {
-                serializer.Serialize(stringWriter, CookieContainer);
-            }
-            catch (Exception)
-            {
-                Config.Current.UserTokens.Remove(Name);
-                return;
-            }
-
-            Config.Current.UserTokens[Name] = stringWriter.ToString();
-        }
-
-        #endregion
-
         #region Request Utils
 
         protected HttpWebRequest CreateWebRequest(string uri)
@@ -94,7 +47,7 @@ namespace SimpleBox.Puller
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
             request.UserAgent = HttpUserAgent;
             request.Accept = HttpAccept;
-            request.CookieContainer = CookieContainer;
+            request.CookieContainer = CookieStorageHelper.CurrentCookieContainer;
             return request;
         }
 
