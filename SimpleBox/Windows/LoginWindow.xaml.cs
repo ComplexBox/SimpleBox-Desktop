@@ -29,21 +29,6 @@ namespace SimpleBox.Windows
     public partial class LoginWindow
     {
         /// <summary>
-        /// Open a new <see cref="LoginWindow"/> for test use.
-        /// </summary>
-        /// <param name="address">The start address.</param>
-        public LoginWindow(string address)
-        {
-            InitializeComponent();
-
-            //Handler = new MallowResourceRequestHandler();
-            //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
-            //Browser.RequestHandler = requestHandler;
-
-            Browser.Address = address;
-        }
-
-        /// <summary>
         /// Create window for login.
         /// </summary>
         /// <param name="puller">The mallow puller.</param>
@@ -60,6 +45,8 @@ namespace SimpleBox.Windows
 
             //MallowRequestHandler requestHandler = new MallowRequestHandler(Handler);
             //Browser.RequestHandler = requestHandler;
+
+            Closed += (sender, args) => Browser.Dispose();
 
             Browser.Address = puller.Address;
 
