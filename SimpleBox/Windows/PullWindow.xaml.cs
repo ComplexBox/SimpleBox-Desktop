@@ -102,9 +102,7 @@ namespace SimpleBox.Windows
         private void StartClick(object sender, RoutedEventArgs e)
         {
             RootElement.IsEnabled = false;
-            //Task.Factory.StartNew(PullHelper.PullCore, this);
-
-            _ = PullHelper.PullCore(this);
+            Task.Factory.StartNew(PullHelper.PullCore, this);
         }
 
         private void CancelClick(object sender, RoutedEventArgs e) => Close();
