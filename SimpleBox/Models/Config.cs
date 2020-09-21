@@ -66,6 +66,19 @@ namespace SimpleBox.Models
 
         #endregion
 
+        [JsonProperty]
+        private string pictureRenderAddress = @"https://showcase.simplebox.vbox.moe/";
+
+        public string PictureRenderAddress
+        {
+            get => pictureRenderAddress;
+            set
+            {
+                pictureRenderAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
         #region Property Changed
 
         public event PropertyChangedEventHandler PropertyChanged;

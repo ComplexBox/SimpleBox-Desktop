@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Controls\FluentIcon.cs" />
     <Compile Include="Core\Importer.cs" />
+    <Compile Include="Core\PictureRender.cs" />
     <Compile Include="Helpers\CookieStorageHelper.cs" />
     <Compile Include="Puller\MallowPuller.cs" />
     <Compile Include="Puller\MarshmallowPuller.cs" />
