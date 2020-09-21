@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -88,6 +89,8 @@ namespace SimpleBox.Puller
                             OriginalMessage = obj.GetValue("body")?.ToString()
                         });
                     }
+
+                    foreach (Mallow mallow in items) mallow.SetValuesOnDeserialized(new StreamingContext());
 
                     foreach (Mallow mallow in items)
                     {
