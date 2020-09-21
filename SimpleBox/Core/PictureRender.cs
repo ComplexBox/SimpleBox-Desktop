@@ -48,7 +48,7 @@ namespace SimpleBox.Core
 
             ProgressDialog dialog = new ProgressDialog
             {
-                Text = "准备导出……",
+                Text = "准备导出…",
                 MinimizeBox = false,
                 ShowCancelButton = false,
                 ShowTimeRemaining = true,
@@ -59,7 +59,7 @@ namespace SimpleBox.Core
 
             dialog.ReportProgress(
                 0,
-                "准备导出……",
+                "准备导出…",
                 "加载渲染组件");
 
             PictureRenderCore renderCore = PictureRenderCore.CreateRenderCore();
@@ -68,7 +68,7 @@ namespace SimpleBox.Core
             {
                 dialog.ReportProgress(
                     (int) Math.Floor(index * 100 / (double) mallows.Count),
-                    "正在导出图片……",
+                    "正在导出图片…",
                     $"第{index}个，共{mallows.Count}个");
 
                 string fileName = mallows[index].Key;
@@ -87,7 +87,7 @@ namespace SimpleBox.Core
 
             dialog.ReportProgress(
                 100,
-                "正在导出图片……",
+                "正在导出图片…",
                 "正在清理");
 
             renderCore.Dispose();

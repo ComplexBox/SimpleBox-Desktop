@@ -338,7 +338,7 @@
                                                         <controls:FluentMenuIcon Symbol="Move" />
                                                     </MenuItem.Icon>
                                                 </MenuItem>
-                                                <MenuItem Header="导出为图片……" Click="RenderPictureSingleClick">
+                                                <MenuItem Header="导出为图片…" Click="RenderPictureSingleClick">
                                                     <MenuItem.Icon>
                                                         <controls:FluentMenuIcon Symbol="ImageAdd" />
                                                     </MenuItem.Icon>
@@ -465,7 +465,7 @@
                                 Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
                             <Button.ContextMenu>
                                 <fw:AcrylicContextMenu>
-                                <MenuItem Header="导出为图片……"
+                                <MenuItem Header="导出为图片…"
                                               Click="RenderPictureMultiClick">
                                         <MenuItem.Icon>
                                             <controls:FluentMenuIcon Symbol="ImageAdd" />
@@ -554,7 +554,7 @@
                         </Button>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" >
                             <Button Style="{DynamicResource ButtonRevealTransparentStyle}"
-                                    ToolTip="导出为图片……" Click="RenderPictureClick">
+                                    ToolTip="导出为图片…" Click="RenderPictureClick">
                                 <controls:FluentIcon Symbol="ImageAdd" />
                             </Button>
                         </StackPanel>
