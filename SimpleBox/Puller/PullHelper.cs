@@ -43,8 +43,6 @@ namespace SimpleBox.Puller
             puller.Progress.IsIndeterminate = true;
             puller.Progress.Text = "保存用户信息……";
 
-            CookieStorageHelper.SaveData();
-
             Application.Current.Dispatcher.Invoke(() => pullWindow.Close());
 
             if (mallows is null)

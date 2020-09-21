@@ -14,39 +14,7 @@ namespace SimpleBox.Helpers
     {
         #region Current
 
-        public static CookieCollection CurrentCookies { get; set; } = LoadData();
-
-        #endregion
-
-        #region Storage Helper
-
-        private static string GetConfigFileName() => Path.Combine(ConfigHelper.GetConfigFolder(), "cookies.json");
-
-        private static CookieCollection LoadData()
-        {
-            try
-            {
-                if (!File.Exists(GetConfigFileName())) throw new Exception();
-
-                return JsonConvert.DeserializeObject<CookieCollection>(File.ReadAllText(GetConfigFileName()));
-            }
-            catch (Exception)
-            {
-                return new CookieCollection();
-            }
-        }
-
-        public static void SaveData()
-        {
-            try
-            {
-                File.WriteAllText(GetConfigFileName(), JsonConvert.SerializeObject(CurrentCookies));
-            }
-            catch (Exception)
-            {
-                // Ignore
-            }
-        }
+        public static CookieCollection CurrentCookies { get; set; } = new CookieCollection();
 
         #endregion
     }
