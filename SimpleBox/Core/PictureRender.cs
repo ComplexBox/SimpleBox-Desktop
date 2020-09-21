@@ -99,7 +99,7 @@ namespace SimpleBox.Core
 
         #region Save Dialog
 
-        private const string DialogTitle = "导出图片";
+        private const string DialogTitle = "导出为图片";
 
         private static string SelectSaveFilePath()
         {
