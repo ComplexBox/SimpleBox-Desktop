@@ -197,6 +197,32 @@ namespace SimpleBox.Windows
 
         #endregion
 
+        #region Triggers - Picture Render
+
+        private void RenderPictureClick(object sender, RoutedEventArgs e)
+        {
+            PictureRender.RenderSingle(MallowSource.CurrentSource.Current.CurrentMallow);
+        }
+
+        private void RenderPictureSingleClick(object sender, RoutedEventArgs e)
+        {
+            if (!((((sender as MenuItem)?.Parent as ContextMenu)?.PlacementTarget as FrameworkElement)?.DataContext is Mallow mallow)) return;
+
+            PictureRender.RenderSingle(mallow);
+        }
+
+        private void RenderPictureMultiClick(object sender, RoutedEventArgs e)
+        {
+            if (MallowList.SelectedItems.Count == 0 || MallowSource.CurrentSource.Current is null || !ConfirmDelete()) return;
+
+            Mallow[] mallows = new Mallow[MallowList.SelectedItems.Count];
+            MallowList.SelectedItems.CopyTo(mallows, 0);
+
+            PictureRender.RenderMultiple(mallows);
+        }
+
+        #endregion
+
         #region Triggers - Import & Export
 
         private void ImportClick(object sender, RoutedEventArgs e)

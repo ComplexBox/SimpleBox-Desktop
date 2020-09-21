@@ -338,6 +338,11 @@
                                                         <controls:FluentMenuIcon Symbol="Move" />
                                                     </MenuItem.Icon>
                                                 </MenuItem>
+                                                <MenuItem Header="导出为图片……" Click="RenderPictureSingleClick">
+                                                    <MenuItem.Icon>
+                                                        <controls:FluentMenuIcon Symbol="ImageAdd" />
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
                                                 <MenuItem Header="删除" Click="MallowDeleteClick">
                                                     <MenuItem.Icon>
                                                         <controls:FluentMenuIcon Symbol="Delete" />
@@ -455,12 +460,27 @@
                                        Style="{DynamicResource AppBarWideTextStyle}" />
                         </Grid>
                     </Button>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <Button Style="{DynamicResource ButtonRevealTransparentStyle}"
-                                ToolTip="删除" Click="MallowMultiDeleteClick">
-                            <controls:FluentIcon Symbol="Delete"/>
-                        </Button>
-                    </StackPanel>
+                    <Button Grid.Column="1" Style="{DynamicResource ButtonRevealTransparentStyle}"
+                                ToolTip="更多"
+                                Command="{x:Static utils:OpenContextMenu.OpenContextMenuCommand}">
+                            <Button.ContextMenu>
+                                <fw:AcrylicContextMenu>
+                                <MenuItem Header="导出为图片……"
+                                              Click="RenderPictureMultiClick">
+                                        <MenuItem.Icon>
+                                            <controls:FluentMenuIcon Symbol="ImageAdd" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="删除"
+                                              Click="MallowMultiDeleteClick">
+                                        <MenuItem.Icon>
+                                            <controls:FluentMenuIcon Symbol="Delete" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </fw:AcrylicContextMenu>
+                            </Button.ContextMenu>
+                        <controls:FluentIcon Symbol="More" />
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>
@@ -532,7 +552,12 @@
                                            Style="{DynamicResource AppBarWideTextStyle}" />
                             </Grid>
                         </Button>
-                        <StackPanel Orientation="Horizontal" Grid.Column="1" />
+                        <StackPanel Orientation="Horizontal" Grid.Column="1" >
+                            <Button Style="{DynamicResource ButtonRevealTransparentStyle}"
+                                    ToolTip="导出为图片……" Click="RenderPictureClick">
+                                <controls:FluentIcon Symbol="ImageAdd" />
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>
