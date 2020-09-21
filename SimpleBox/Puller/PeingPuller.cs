@@ -16,7 +16,7 @@ namespace SimpleBox.Puller
     public sealed class PeingPuller : MallowPuller
     {
         public override string Name { get; } = "Peing";
-        public override string Address { get; } = @"https://peing.net/zh-CN/box?page=1";
+        public override string Address { get; } = @"https://peing.net/zh-CN/box";
 
         private readonly XPathExpression _extractEx
             = XPathExpression.Compile("//div[@data-questions]");
