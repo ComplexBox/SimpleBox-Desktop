@@ -89,7 +89,7 @@ namespace SimpleBox.Windows
                 IsLoginComplete = true;
                 timer.Stop();
                 timer.Dispose();
-                Close();
+                Dispatcher.Invoke(Close);
             };
         }
 
