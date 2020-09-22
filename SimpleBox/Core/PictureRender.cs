@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -53,61 +54,59 @@ namespace SimpleBox.Core
                 WindowTitle = DialogTitle
             };
 
-            dialog.DoWork += async (sender, args) =>
+            dialog.DoWork += RenderDoWork;
+
+            dialog.Show(mallows);
+        }
+
+        static async void RenderDoWork(object sender, DoWorkEventArgs args)
+        {
+            if (!(sender is ProgressDialog dialog)) return;
+
+            if (!(args.Argument is List<KeyValuePair<string, Mallow>> mallows)) return;
+
+            if (dialog.CancellationPending) return;
+
+            dialog.ReportProgress(0, "准备导出…", "加载渲染组件");
+
+            PictureRenderCore renderCore = PictureRenderCore.CreateRenderCore();
+
+            if (dialog.CancellationPending)
             {
-                if (dialog.CancellationPending) return;
+                renderCore.Dispose();
+                return;
+            }
 
-                dialog.ReportProgress(
-                    0,
-                    "准备导出…",
-                    "加载渲染组件");
-
-                PictureRenderCore renderCore = PictureRenderCore.CreateRenderCore();
-
+            for (int index = 0; index < mallows.Count; index++)
+            {
                 if (dialog.CancellationPending)
                 {
                     renderCore.Dispose();
                     return;
                 }
 
-                for (int index = 0; index < mallows.Count; index++)
-                {
-                    if (dialog.CancellationPending)
-                    {
-                        renderCore.Dispose();
-                        return;
-                    }
+                dialog.ReportProgress((int) Math.Floor(index * 100 / (double) mallows.Count), "正在导出图片…",
+                    $"第{index}个，共{mallows.Count}个");
 
-                    dialog.ReportProgress(
-                        (int)Math.Floor(index * 100 / (double)mallows.Count),
-                        "正在导出图片…",
-                        $"第{index}个，共{mallows.Count}个");
+                string fileName = mallows[index].Key;
+                Mallow mallow = mallows[index].Value;
 
-                    string fileName = mallows[index].Key;
-                    Mallow mallow = mallows[index].Value;
+                bool pushed = false;
+                WebPush.Current.PushMallow(mallow, () => pushed = true);
 
-                    bool pushed = false;
-                    WebPush.Current.PushMallow(mallow, () => pushed = true);
+                while (true)
+                    if (pushed)
+                        break;
 
-                    while (true)
-                        if (pushed)
-                            break;
+                Bitmap result = await renderCore.Capture();
+                result.Save(fileName);
+            }
 
-                    Bitmap result = await renderCore.Capture();
-                    result.Save(fileName);
-                }
+            dialog.ReportProgress(100, "正在导出图片…", "正在清理");
 
-                dialog.ReportProgress(
-                    100,
-                    "正在导出图片…",
-                    "正在清理");
+            renderCore.Dispose();
 
-                renderCore.Dispose();
-
-                dialog.Dispose();
-            };
-
-            dialog.ShowDialog();
+            //dialog.Dispose();
         }
 
         #endregion
