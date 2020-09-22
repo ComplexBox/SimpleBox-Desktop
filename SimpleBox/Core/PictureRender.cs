@@ -22,11 +22,10 @@ namespace SimpleBox.Core
             string fileName = SelectSaveFilePath();
             if (string.IsNullOrEmpty(fileName)) return;
 
-            Task.Factory.StartNew(Render,
-                new List<KeyValuePair<string, Mallow>>
-                {
-                    new KeyValuePair<string, Mallow>(fileName, mallow)
-                });
+            Render(new List<KeyValuePair<string, Mallow>>
+            {
+                new KeyValuePair<string, Mallow>(fileName, mallow)
+            });
         }
 
         public static void RenderMultiple(Mallow[] mallows)
@@ -34,7 +33,7 @@ namespace SimpleBox.Core
             string folderName = SelectSaveFolderPath();
             if (string.IsNullOrEmpty(folderName)) return;
 
-            Task.Factory.StartNew(Render, mallows.Select((t, i) =>
+            Render(mallows.Select((t, i) =>
                 new KeyValuePair<string, Mallow>(Path.Combine(folderName, $"SimpleBoxExport_{i:D3}.png"), t)).ToList());
         }
 
@@ -42,57 +41,72 @@ namespace SimpleBox.Core
 
         #region Core
 
-        private static async Task Render(object state)
+        private static void Render(List<KeyValuePair<string, Mallow>> mallows)
         {
-            if (!(state is List<KeyValuePair<string, Mallow>> mallows)) return;
-
             ProgressDialog dialog = new ProgressDialog
             {
                 Text = "准备导出…",
                 MinimizeBox = false,
-                ShowCancelButton = false,
+                ShowCancelButton = true,
                 ShowTimeRemaining = true,
                 WindowTitle = DialogTitle
             };
 
-            dialog.ShowDialog();
-
-            dialog.ReportProgress(
-                0,
-                "准备导出…",
-                "加载渲染组件");
-
-            PictureRenderCore renderCore = PictureRenderCore.CreateRenderCore();
-
-            for (int index = 0; index < mallows.Count; index++)
+            dialog.DoWork += async (sender, args) =>
             {
+                if (dialog.CancellationPending) return;
+
                 dialog.ReportProgress(
-                    (int) Math.Floor(index * 100 / (double) mallows.Count),
+                    0,
+                    "准备导出…",
+                    "加载渲染组件");
+
+                PictureRenderCore renderCore = PictureRenderCore.CreateRenderCore();
+
+                if (dialog.CancellationPending)
+                {
+                    renderCore.Dispose();
+                    return;
+                }
+
+                for (int index = 0; index < mallows.Count; index++)
+                {
+                    if (dialog.CancellationPending)
+                    {
+                        renderCore.Dispose();
+                        return;
+                    }
+
+                    dialog.ReportProgress(
+                        (int)Math.Floor(index * 100 / (double)mallows.Count),
+                        "正在导出图片…",
+                        $"第{index}个，共{mallows.Count}个");
+
+                    string fileName = mallows[index].Key;
+                    Mallow mallow = mallows[index].Value;
+
+                    bool pushed = false;
+                    WebPush.Current.PushMallow(mallow, () => pushed = true);
+
+                    while (true)
+                        if (pushed)
+                            break;
+
+                    Bitmap result = await renderCore.Capture();
+                    result.Save(fileName);
+                }
+
+                dialog.ReportProgress(
+                    100,
                     "正在导出图片…",
-                    $"第{index}个，共{mallows.Count}个");
+                    "正在清理");
 
-                string fileName = mallows[index].Key;
-                Mallow mallow = mallows[index].Value;
+                renderCore.Dispose();
 
-                bool pushed = false;
-                WebPush.Current.PushMallow(mallow, () => pushed = true);
+                dialog.Dispose();
+            };
 
-                while (true)
-                    if (pushed)
-                        break;
-
-                Bitmap result = await renderCore.Capture();
-                result.Save(fileName);
-            }
-
-            dialog.ReportProgress(
-                100,
-                "正在导出图片…",
-                "正在清理");
-
-            renderCore.Dispose();
-
-            dialog.Dispose();
+            dialog.ShowDialog();
         }
 
         #endregion
