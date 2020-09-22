@@ -198,8 +198,6 @@ namespace SimpleBox.Core
 
             _browser.Load(Config.Current.PictureRenderAddress);
 
-            Thread.Sleep(8);
-
             AutoResetEvent reset = new AutoResetEvent(false);
 
             _browser.FrameLoadEnd += (sender, args) => reset.Set();
@@ -210,8 +208,6 @@ namespace SimpleBox.Core
         public async Task<Bitmap> Capture()
         {
             _resetFlag.WaitOne();
-
-            _browser.Load(Config.Current.PictureRenderAddress);
 
             await Task.Delay(TimeSpan.FromSeconds(6));
 
