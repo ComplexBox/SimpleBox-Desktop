@@ -77,6 +77,10 @@ namespace SimpleBox.Core
                 return;
             }
 
+            dialog.ReportProgress(0, "准备导出…", "加载展示场景");
+
+            renderCore.LoadFrame();
+
             for (int index = 0; index < mallows.Count; index++)
             {
                 if (dialog.CancellationPending)
@@ -186,6 +190,21 @@ namespace SimpleBox.Core
             core._browser.BrowserInitialized += (sender, args) => core._resetFlag.Set();
 
             return core;
+        }
+
+        public void LoadFrame()
+        {
+            _resetFlag.WaitOne();
+
+            _browser.Load(Config.Current.PictureRenderAddress);
+
+            Thread.Sleep(8);
+
+            AutoResetEvent reset = new AutoResetEvent(false);
+
+            _browser.FrameLoadEnd += (sender, args) => reset.Set();
+
+            reset.WaitOne();
         }
 
         public async Task<Bitmap> Capture()
