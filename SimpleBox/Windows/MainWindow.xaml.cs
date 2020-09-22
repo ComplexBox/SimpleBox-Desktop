@@ -16,8 +16,8 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
+using Ookii.Dialogs.Wpf;
 using SimpleBox.Core;
 using SimpleBox.Helpers;
 using SimpleBox.Models;
@@ -280,15 +280,22 @@ namespace SimpleBox.Windows
             popup.IsOpen = true;
         }
 
-        private static bool ConfirmDelete()
-        {
-            return MessageBox.Show(
-                "确定要删除吗?",
-                "删除",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning,
-                MessageBoxResult.Yes) == MessageBoxResult.Yes;
-        }
+        private static bool ConfirmDelete() =>
+            new TaskDialog
+            {
+                AllowDialogCancellation = true,
+                EnableHyperlinks = false,
+                MainInstruction = "即将删除项目。是否确定?",
+                Content = "删除的项目无法恢复。",
+                MainIcon = TaskDialogIcon.Information,
+                MinimizeBox = false,
+                WindowTitle = "删除",
+                Buttons =
+                {
+                    new TaskDialogButton(ButtonType.Ok),
+                    new TaskDialogButton(ButtonType.Cancel)
+                }
+            }.Show().ButtonType == ButtonType.Ok;
 
         #endregion
 
