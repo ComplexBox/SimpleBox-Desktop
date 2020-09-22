@@ -213,7 +213,7 @@ namespace SimpleBox.Windows
 
         private void RenderPictureMultiClick(object sender, RoutedEventArgs e)
         {
-            if (MallowList.SelectedItems.Count == 0 || MallowSource.CurrentSource.Current is null || !ConfirmDelete()) return;
+            if (MallowList.SelectedItems.Count == 0 || MallowSource.CurrentSource.Current is null) return;
 
             Mallow[] mallows = new Mallow[MallowList.SelectedItems.Count];
             MallowList.SelectedItems.CopyTo(mallows, 0);
