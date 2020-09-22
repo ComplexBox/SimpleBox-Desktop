@@ -36,7 +36,7 @@ namespace SimpleBox.Core
             if (string.IsNullOrEmpty(folderName)) return;
 
             Render(mallows.Select((t, i) =>
-                new KeyValuePair<string, Mallow>(Path.Combine(folderName, $"SimpleBoxExport_{i:D3}.png"), t)).ToList());
+                new KeyValuePair<string, Mallow>(Path.Combine(folderName, $"SimpleBoxExport_{i + 1:D3}.png"), t)).ToList());
         }
 
         #endregion
