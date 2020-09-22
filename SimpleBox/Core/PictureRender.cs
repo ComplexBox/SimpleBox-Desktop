@@ -59,7 +59,7 @@ namespace SimpleBox.Core
             dialog.Show(mallows);
         }
 
-        static async void RenderDoWork(object sender, DoWorkEventArgs args)
+        static void RenderDoWork(object sender, DoWorkEventArgs args)
         {
             if (!(sender is ProgressDialog dialog)) return;
 
@@ -98,8 +98,9 @@ namespace SimpleBox.Core
                     if (pushed)
                         break;
 
-                Bitmap result = await renderCore.Capture();
-                result.Save(fileName);
+                Task<Bitmap> task = renderCore.Capture();
+                task.Wait();
+                task.Result.Save(fileName);
             }
 
             dialog.ReportProgress(100, "正在导出图片…", "正在清理");
