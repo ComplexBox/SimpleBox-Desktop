@@ -212,7 +212,7 @@ namespace SimpleBox.Core
         {
             _resetFlag.WaitOne();
 
-            await Task.Delay(TimeSpan.FromSeconds(6));
+            await Task.Delay(TimeSpan.FromSeconds(5));
 
             return await _browser.ScreenshotAsync();
         }
