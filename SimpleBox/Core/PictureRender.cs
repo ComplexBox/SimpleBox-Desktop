@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using CefSharp;
 using CefSharp.OffScreen;
@@ -155,7 +156,9 @@ namespace SimpleBox.Core
     {
         #region Browser Object
 
-        private ChromiumWebBrowser Browser;
+        private ChromiumWebBrowser _browser;
+
+        private readonly ManualResetEvent _resetFlag = new ManualResetEvent(false);
 
         #endregion
 
@@ -174,26 +177,30 @@ namespace SimpleBox.Core
 
             PictureRenderCore core = new PictureRenderCore
             {
-                Browser = new ChromiumWebBrowser(
+                _browser = new ChromiumWebBrowser(
                     Config.Current.PictureRenderAddress,
                     browserSettings,
                     new RequestContext())
             };
+
+            core._browser.BrowserInitialized += (sender, args) => core._resetFlag.Set();
 
             return core;
         }
 
         public async Task<Bitmap> Capture()
         {
-            Browser.Load(Config.Current.PictureRenderAddress);
+            _resetFlag.WaitOne();
+
+            _browser.Load(Config.Current.PictureRenderAddress);
 
             await Task.Delay(TimeSpan.FromSeconds(6));
 
-            return await Browser.ScreenshotAsync();
+            return await _browser.ScreenshotAsync();
         }
 
         #endregion
 
-        public void Dispose() => Browser.Dispose();
+        public void Dispose() => _browser.Dispose();
     }
 }
