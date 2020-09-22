@@ -187,6 +187,9 @@ namespace SimpleBox.Core
                     new RequestContext())
             };
 
+            core._browser.FrameLoadEnd += (sender, args) =>
+                args.Frame.ExecuteJavaScriptAsync("document.body.style.background = 'transparent';");
+
             core._browser.BrowserInitialized += (sender, args) => core._resetFlag.Set();
 
             return core;
